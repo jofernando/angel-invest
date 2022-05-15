@@ -36,17 +36,15 @@ class ShowStartupTest extends DuskTestCase
             Telefone::factory()->createTelefone($startup);
             Documento::factory()->createDocumento($startup);
             $this->login($browser, $startup->user);
-            $browser->visitRoute('startups.show', $startup)
+            $browser->visitRoute('startups.show',  ['startup' => $startup])
                     ->assertSee($startup->nome)
                     ->assertSee($startup->descricao)
-                    ->assertSee($startup->cnpj)
                     ->assertSee($startup->area->nome)
-                    ->assertSee($startup->email)
-                    ->assertSee($startup->logo)
-                    ->assertSee($startup->endereco->cep)
-                    ->assertSee($startup->endereco->bairro)
+
+
+
                     ->assertSee($startup->endereco->rua)
-                    ->assertSee($startup->endereco->numero)
+
                     ->assertSee($startup->endereco->estado)
                     ->assertSee($startup->endereco->cidade)
                     ->assertSee($startup->telefones->first()->numero)
