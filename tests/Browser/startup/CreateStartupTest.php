@@ -46,7 +46,6 @@ class CreateStartupTest extends DuskTestCase
                     ->assertSee('Documentos')
                     ->assertSee('Novo documento')
                     ->type('nomes[]', 'documento teste')
-
                     ->attach('documentos[]', __DIR__ . '/doc/arquivo_teste.pdf')
                     ->press('Salvar')
                     ->assertSee('Startup criada com sucesso!')
