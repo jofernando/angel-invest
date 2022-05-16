@@ -29,9 +29,11 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('pagamento.index')}}">Carteira</a>
-                    <a class="nav-link" href="{{route('chat.index')}}">Mensagens</a>
                 </li>
                 @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('chat.index')}}">Mensagens</a>
+                </li>
                 {{--<li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
                 </li>--}}

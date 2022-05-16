@@ -20,7 +20,7 @@
                 @endif
                 <div class="col-md-6 mt-2 mb-2">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="margin-top: -15px;">
                             <div class="row justify-content-between" style="height: 100%">
                                 <div class="col-md-6 py-0 px-0">
                                     <div class="row area-startup" style="margin-top: -24px;">

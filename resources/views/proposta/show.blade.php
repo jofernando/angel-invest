@@ -119,10 +119,10 @@
                                     <p class="col-md-12 display-4 fw-bold" style="text-align: center; font-size: 20px;">@if($proposta->leilao_atual())Investidores contemplados no momento @else Investidores contemplados @endif</p>
                                 @endif
                                 @forelse ($leilao->lances as $index => $lance)
+                                    @if(auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id)
+                                        @include('leiloes.lances.edit', ['leilao' => $proposta->leilao_atual(), 'lance' => $lance])
+                                    @endif
                                     @if($index < $leilao->numero_ganhadores)
-                                        @if(auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id)
-                                            @include('leiloes.lances.edit', ['leilao' => $proposta->leilao_atual(), 'lance' => $lance])
-                                        @endif
                                         <div @class([
                                                 'w-1/2' => $index == 1 || $index == 2,
                                                 'w-full' => $index != 1 && $index != 2,
