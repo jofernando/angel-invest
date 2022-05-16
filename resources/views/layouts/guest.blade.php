@@ -22,6 +22,7 @@
         <script src="{{ asset('bootstrap-5.1.3/js/bootstrap.js') }}"></script>
         <script src="{{ asset('jquery/jquery-3.6.min.js') }}"></script>
         <script src="{{ asset('jquery/jquery.mask.min.js') }}"></script>
+        <script type="text/javascript" src="{{ PagSeguro::getUrl()['javascript'] }}"></script>
     </head>
     <body style="background-color: white;">
         @component('layouts.nav_bar')@endcomponent

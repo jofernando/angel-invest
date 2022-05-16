@@ -7,6 +7,7 @@ use App\Models\Leilao;
 use App\Models\Proposta;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\LeilaoRequest;
+use App\Models\Lance;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -236,5 +237,19 @@ class LeilaoController extends Controller
                 Storage::delete('public/' . $leilao->porcetagem_caminho);
             }
         }
+    }
+
+    /**
+     * Recupera todos os lances realizados naquele leilão e exibe em uma tela única
+     *
+     * @param Leilao $leilao
+     * @return void
+     */
+
+    public function leilaoLances(Leilao $leilao)
+    {
+        $this->authorize('create', Leilao::class);
+        $lances = Lance::where('leilao_id', $leilao->id)->orderByDesc('valor')->paginate(20);
+        return view('leiloes.lances.index', compact('lances', 'leilao'));
     }
 }

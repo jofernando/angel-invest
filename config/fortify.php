@@ -1,7 +1,10 @@
 <?php
 
+
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Auth;
 
 return [
 
@@ -61,7 +64,17 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    'home' => function(){
+        $tipo = Auth::user()->tipo; 
+        switch ($tipo) {
+            case User::PROFILE_ENUM['entrepreneur']:
+                return '/startups';
+                break;
+            case User::PROFILE_ENUM['investor']:
+                return '/lances';
+                break; 
+        }
+    },
 
     /*
     |--------------------------------------------------------------------------

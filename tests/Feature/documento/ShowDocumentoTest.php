@@ -33,6 +33,6 @@ class ShowDocumentoTest extends TestCase
         
         $documento = $this->criar_documento($startup);
         $response = $this->get(route('documento.arquivo',$documento->id+99999));
-        $response->assertStatus(403);
+        $response->assertStatus(404);
     }
 }

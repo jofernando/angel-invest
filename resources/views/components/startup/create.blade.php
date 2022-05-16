@@ -33,14 +33,13 @@
             </div>
             <div class="row">
                 <div class="pb-3 col-6">
-                    <label class="form-label pb-2" for="cnpj">CNPJ <span class="text-red">*</span></label>
+                    <label class="form-label pb-2" for="cnpj">CNPJ</label>
                     <input type="text"
                         class="form-control border-ternary h-11 @error('cnpj') is-invalid @enderror"
                         id="cnpj"
                         name="cnpj"
                         value="{{ old('cnpj') }}"
-                        placeholder="Digite aqui o CNPJ da startup..."
-                        required>
+                        placeholder="Digite aqui o CNPJ da startup...">
                         @error('cnpj')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

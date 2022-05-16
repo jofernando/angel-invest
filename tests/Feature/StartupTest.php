@@ -155,7 +155,6 @@ class StartupTest extends TestCase
             'nome' => 'O campo nome é obrigatório.',
             'descricao' => 'O campo descrição é obrigatório.',
             'logo' => 'O campo logo é obrigatório.',
-            'cnpj' => 'O campo CNPJ é obrigatório.',
             'email' => 'O campo e-mail é obrigatório.',
             'area' => 'O campo área é obrigatório.'
         ]);

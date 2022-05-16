@@ -7,8 +7,10 @@ use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\LanceController;
 use App\Http\Controllers\TelefoneController;
 use App\Http\Controllers\LeilaoController;
+use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Builder\Function_;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +32,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    /*Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard');*/
     Route::resource('startups', StartupController::class);
 
     Route::get('/get-component', [StartupController::class, 'startupGetComponent'])->name('startup.component.ajax');
@@ -46,6 +48,7 @@ Route::middleware([
     ])->except('index');
     Route::get('lances', [LanceController::class, 'index'])->name('lances');
     Route::get('leilao/{leilao}/termo', [LeilaoController::class, 'show_termo'])->name('leilao.termo');
+    Route::get('leilao/{leilao}/lances', [LeilaoController::class, 'leilaoLances'])->name('leilao.lances');
 
     Route::get('startups/{startup}/documentos-edit', [DocumentoController::class, 'edit'])->name('documentos.edit');
     Route::put('startups/{startup}/documentos-update', [DocumentoController::class, 'update'])->name('documentos.update');
@@ -55,4 +58,12 @@ Route::middleware([
     Route::resource('startups/{startup}/telefones', TelefoneController::class)->except('edit', 'update');
     Route::get('startups/{startup}/telefones-edit', [TelefoneController::class, 'edit'])->name('telefones.edit');
     Route::put('startups/{startup}/telefones-update', [TelefoneController::class, 'update'])->name('telefones.update');
+
+    Route::get('pagamento/novo-pagamento',[PagamentoController::class, 'create'] )->name('pagamento.create');
+    Route::get('pagamentos',[PagamentoController::class, 'index'] )->name('pagamento.index');
+    Route::post('pagamento/salvar',[PagamentoController::class, 'store'] )->name('pagamento.store');
+
 });
+
+    Route::post('pagseguro/notificacao', [PagamentoController::class, 'notificacao'])->name('pagamento.notificacao');
+

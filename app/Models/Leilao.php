@@ -57,4 +57,9 @@ class Leilao extends Model
         $enddate = new DateTime($this->data_fim);
         return $now >= $startdate && $now <= $enddate;
     }
+
+    public function investidor_fez_lance(Investidor $investidor)
+    {
+        return $this->lances()->where('investidor_id', $investidor->id)->get()->isNotEmpty();
+    }
 }

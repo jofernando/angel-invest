@@ -35,4 +35,9 @@ class Investidor extends Model
             return $lance->leilao;
         });
     }
+
+    public function pagamentos()
+    {
+        return $this->hasMany(Pagamento::class);
+    }
 }

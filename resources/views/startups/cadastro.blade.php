@@ -146,7 +146,7 @@
                                                             <x-documentos.create :startup="$startup"/>
                                                         @endif
                                                     @else
-                                                        @if(!is_null(old('cnpj')))
+                                                        @if(!is_null(old('email')))
                                                             <script>
                                                                 $(document).ready(function(){
                                                                      alterarEtapa($('#botao-info'), 'Informações básicas', true);

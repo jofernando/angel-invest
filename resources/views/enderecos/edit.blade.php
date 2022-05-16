@@ -45,7 +45,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="cep" class="form-label pb-1 mt-2">CEP <span class="text-red">*</span></label>
-                                                        <input type="cep" id="cep" name="cep" class="form-control border-ternary h-11 @error('cep') is-invalid @enderror" value="{{old('cep', $endereco->cep)}}" required onblur="pesquisacep(this.value);">
+                                                        <input type="cep" id="cep" name="cep" class="form-control border-ternary h-11 @error('cep') is-invalid @enderror" value="{{old('cep', $endereco->cep)}}" required onkeyup="pesquisacep(this.value);">
                                                         @error('cep')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror

@@ -31,7 +31,7 @@
                     <div class="col-md-12">
                         <div id="search-text-title">
                             <h2>Produtos expostos na Angel Invest</h2>
-                            Mais de <span class="numero-destaque-color">{{$leiloes[0]->count()+$leiloes[1]->count()-1}}</span> produtos
+                            Mais de <span class="numero-destaque-color">{{$total-1}}</span> produtos
                         </div>
                     </div>
                 </div>
@@ -121,135 +121,206 @@
                 </div>
             </div>
         </form>
-        @if ($leiloes[0]->count() > 0)
-            <div class="container-fluid mt-4">
-                <div id="row-startups" class="row">
-                    <div class="col-md-12">
-                        <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h6 style="font-weight: bolder;">Produtos em leilão</h6></a>
+        @if($leiloes_buscados->first() == null && $leiloes->first() != null)
+            @if ($leiloes[0]->count() > 0)
+                <div class="container-fluid mt-4">
+                    <div class="row">
+                        <div class="col-md-12 titulo-pag">
+                            <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h5 style="font-weight: bolder;">Produtos em leilão</h5></a>
+                        </div>
                     </div>
-                </div>
-                <div id="row-cards-startups" class="row">
-                    @foreach ($leiloes[0] as $leilao)
-                        <div class="col-md-4">
-                            <div class="card card-home border-none" style="width: 100%;">
-                                <div class="row area-startup" style="margin-top: -24px;">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
-                                        <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
-                                    </div>
-                                </div>
-                                <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
-                                    <img class="thumbnail"  src="{{asset('storage/'.$leilao->proposta->thumbnail_caminho)}}" alt="Thumbnail do produto" style="height: 220px;">
-                                </a>
-                                <div id="div-card-hearder" class="card-header">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a id="idshowa{{$leilao->id}}" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}" style="color: white; text-decoration: none;"><h4 class="card-title">{{$leilao->proposta->titulo}}</h4></a>
-                                            <h5 class="card-subtitle mb-2" style="color: white;">{{$leilao->proposta->startup->nome}}</h5>
+                    <div id="row-cards-startups" class="row" style="background-color: white">
+                        @foreach ($leiloes[0] as $leilao)
+                            <div class="col-md-4">
+                                <div class="card card-home border-none" style="width: 100%; @if($leilao->data_fim < now()) opacity: 0.4; @endif">
+                                    <div class="row area-startup" style="margin-top: -24px;">
+                                        <div class="col-md-4" style="text-align: left; position: relative; left: 10px;" >
+                                            @if($leilao->data_fim < now())
+                                                <span style="color: rgb(238, 0, 0); background-color: white; font-weight: bold; font-size: 18px;">ENCERRADO</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
+                                            <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p class="card-text">{!! mb_strimwidth($leilao->proposta->descricao, 0, 90, "...") !!} @if(strlen($leilao->proposta->descricao) > 90) <a href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">Exibir produto</a> @endif</p>
+                                    <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
+                                        <img class="thumbnail"  src="{{asset('storage/'.$leilao->proposta->thumbnail_caminho)}}" alt="Thumbnail do produto" style="height: 220px;">
+                                    </a>
+                                    <div id="div-card-hearder" class="card-header">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a id="idshowa{{$leilao->id}}" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}" style="color: white; text-decoration: none;"><h4 class="card-title">{{$leilao->proposta->titulo}}</h4></a>
+                                                <h5 class="card-subtitle mb-2" style="color: white;">{{$leilao->proposta->startup->nome}}</h5>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <img class="icon-investidor" src="{{asset('img/investidor-preto.png')}}" alt="Ícone do investidor" style="height: 60px; width: 90px;">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <span class="text-proposta">{{$leilao->lances->count()}} @if($leilao->lances->count() == 1) investidor @else investidores @endif</span>
+                                    <div class="card-body bg-gray-250" style="height: 200px;">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <p class="card-text">{!! mb_strimwidth($leilao->proposta->descricao, 0, 90, "...") !!} @if(strlen($leilao->proposta->descricao) > 90) <a href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">Exibir produto</a> @endif</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <img class="icon-investidor" src="{{asset('img/investidor-preto.png')}}" alt="Ícone do investidor" style="height: 60px; width: 90px;">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="text-proposta">{{$leilao->lances->count()}} @if($leilao->lances->count() == 1) investidor @else investidores @endif</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        @endif
-        @if ($leiloes[1]->count() > 0)
-            <div class="container-fluid mt-4">
-                <div id="row-startups" class="row">
-                    <div class="col-md-12">
-                        <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h6 style="font-weight: bolder;">Produtos com leilão encerrado</h6></a>
+                        @endforeach
                     </div>
                 </div>
-                <div id="row-cards-startups" class="row">
-                    @foreach ($leiloes[1] as $leilao)
-                        <div class="col-md-4">
-                            <div class="card card-home border-none" style="width: 100%;">
-                                <div class="row area-startup" style="margin-top: -24px;">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
-                                        <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
-                                    </div>
-                                </div>
-                                <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
-                                    <img class="thumbnail"  src="{{asset('storage/'.$leilao->proposta->thumbnail_caminho)}}" alt="Thumbnail do produto" style="height: 220px;">
-                                </a>
-                                <div id="div-card-hearder" class="card-header">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a id="idshowa{{$leilao->id}}" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}" style="color: white; text-decoration: none;"><h4 class="card-title">{{$leilao->proposta->titulo}}</h4></a>
-                                            <h5 class="card-subtitle mb-2" style="color: white;">{{$leilao->proposta->startup->nome}}</h5>
+            @endif
+            @if ($leiloes[1]->count() > 0)
+                <div class="container-fluid mt-4">
+                    <div class="row">
+                        <div class="col-md-12 titulo-pag">
+                            <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h5 style="font-weight: bolder;">Produtos com leilão encerrado</h5></a>
+                        </div>
+                    </div>
+                    <div id="row-cards-startups" class="row" style="background-color: white">
+                        @foreach ($leiloes[1] as $leilao)
+                            <div class="col-md-4">
+                                <div class="card card-home border-none" style="width: 100%; @if($leilao->data_fim < now()) opacity: 0.4; @endif">
+                                    <div class="row area-startup" style="margin-top: -24px;">
+                                        <div class="col-md-4" style="text-align: left; position: relative; left: 10px;" >
+                                            @if($leilao->data_fim < now())
+                                                <span style="color: rgb(238, 0, 0); background-color: white; font-weight: bold; font-size: 18px;">ENCERRADO</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
+                                            <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p class="card-text">{!! mb_strimwidth($leilao->proposta->descricao, 0, 90, "...") !!} @if(strlen($leilao->proposta->descricao) > 90) <a href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">Exibir produto</a> @endif</p>
+                                    <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
+                                        <img class="thumbnail"  src="{{asset('storage/'.$leilao->proposta->thumbnail_caminho)}}" alt="Thumbnail do produto" style="height: 220px;">
+                                    </a>
+                                    <div id="div-card-hearder" class="card-header">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a id="idshowa{{$leilao->id}}" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}" style="color: white; text-decoration: none;"><h4 class="card-title">{{$leilao->proposta->titulo}}</h4></a>
+                                                <h5 class="card-subtitle mb-2" style="color: white;">{{$leilao->proposta->startup->nome}}</h5>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <img class="icon-investidor" src="{{asset('img/investidor-preto.png')}}" alt="Ícone do investidor" style="height: 60px; width: 90px;">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <span class="text-proposta">{{$leilao->lances->count()}} @if($leilao->lances->count() == 1) investidor @else investidores @endif</span>
+                                    <div class="card-body bg-gray-250" style="height: 200px;">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <p class="card-text">{!! mb_strimwidth($leilao->proposta->descricao, 0, 90, "...") !!} @if(strlen($leilao->proposta->descricao) > 90) <a href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">Exibir produto</a> @endif</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <img class="icon-investidor" src="{{asset('img/investidor-preto.png')}}" alt="Ícone do investidor" style="height: 60px; width: 90px;">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="text-proposta">{{$leilao->lances->count()}} @if($leilao->lances->count() == 1) investidor @else investidores @endif</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
-        @if ($leiloes[0]->count() == 0 && $leiloes[1]->count() == 0)
-        <div class="container-fluid">
-            <div id="row-startups" class="row">
-                <div class="col-md-12">
-                    <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h6 style="font-weight: bolder;">Produtos</h6></a>
+            @if ($leiloes[0]->count() == 0 && $leiloes[1]->count() == 0)
+            <div class="container-fluid">
+                <div id="row-startups" class="row">
+                    <div class="col-md-12">
+                        <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h6 style="font-weight: bolder;">Produtos</h6></a>
+                    </div>
                 </div>
-            </div>
-            <div id="row-cards-startups" class="row">
-                <div class="col-md-12 mt-4">
-                    <div class="p-5 mb-4 bg-light rounded-3">
-                        <div class="container-fluid py-5">
-                            <h1 class="display-5 fw-bold">Produtos</h1>
-                            <p class="col-md-8 fs-4">Não foram encontrados produtos com leilão para essa busca.
+                <div id="row-cards-startups" class="row">
+                    <div class="col-md-12 mt-4">
+                        <div class="p-5 mb-4 bg-light rounded-3">
+                            <div class="container-fluid py-5">
+                                <h1 class="display-5 fw-bold">Produtos</h1>
+                                <p class="col-md-8 fs-4">Não foram encontrados produtos com leilão para essa busca.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            @endif
+        @else
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col-md-12 titulo-pag">
+                        <a style="text-decoration: none; color:black;"><h5 style="font-weight: bolder;">Resultados da busca @if($request->nome != null)"{{$request->nome}}" @else avançada @endif</h5></a>
+                    </div>
+                </div>
+                <div id="row-cards-startups" class="row" style="background-color: white">
+                    @forelse ($leiloes_buscados as $leilao)
+                        <div class="col-md-4">
+                            <div class="card card-home border-none" style="width: 100%; @if($leilao->data_fim < now()) opacity: 0.4; @endif">
+                                <div class="row area-startup" style="margin-top: -24px;">
+                                    <div class="col-md-4" style="text-align: left; position: relative; left: 10px;" >
+                                        @if($leilao->data_fim < now())
+                                            <span style="color: rgb(238, 0, 0); background-color: white; font-weight: bold; font-size: 18px;">ENCERRADO</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
+                                        <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
+                                    </div>
+                                </div>
+                                <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
+                                    <img class="thumbnail"  src="{{asset('storage/'.$leilao->proposta->thumbnail_caminho)}}" alt="Thumbnail do produto" style="height: 220px;">
+                                </a>
+                                <div id="div-card-hearder" class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a id="idshowa{{$leilao->id}}" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}" style="color: white; text-decoration: none;"><h4 class="card-title">{{$leilao->proposta->titulo}}</h4></a>
+                                            <h5 class="card-subtitle mb-2" style="color: white;">{{$leilao->proposta->startup->nome}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body bg-gray-250" style="height: 200px;">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p class="card-text">{!! mb_strimwidth($leilao->proposta->descricao, 0, 90, "...") !!} @if(strlen($leilao->proposta->descricao) > 90) <a href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">Exibir produto</a> @endif</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <img class="icon-investidor" src="{{asset('img/investidor-preto.png')}}" alt="Ícone do investidor" style="height: 60px; width: 90px;">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <span class="text-proposta">{{$leilao->lances->count()}} @if($leilao->lances->count() == 1) investidor @else investidores @endif</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div id="row-cards-startups" class="row" style="background-color: white;">
+                            <div class="col-md-12 mt-4">
+                                <div class="p-5 mb-4 bg-light rounded-3">
+                                    <div class="container-fluid py-5">
+                                        <p class="col-md-8 fs-4">Não foram encontrados produtos com leilão para essa busca :(
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforelse
+                    <div class="form-row justify-content-center">
+                        <div class="col-md-12">
+                            {{$leiloes_buscados->links()}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
         @component('layouts.footer')@endcomponent
         <script>

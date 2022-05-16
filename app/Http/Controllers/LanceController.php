@@ -30,22 +30,7 @@ class LanceController extends Controller
     public function index()
     {
         $lances = auth()->user()->investidor->lances;
-        $lance = $lances->first();
-        return view('lances.index', compact('lances', 'lance'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Leilao $leilao)
-    {
-        if(auth()->user()->investidor->leiloes()->contains($leilao)) {
-            $lance = Lance::where('investidor_id', auth()->user()->investidor->id)->where('leilao_id', $leilao->id)->first();
-            return redirect()->route('leiloes.lances.edit', ['leilao' => $leilao, 'lance' => $lance]);
-        }
-        return view('leiloes.lances.create', compact('leilao'));
+        return view('lances.index', compact('lances'));
     }
 
     /**
@@ -59,39 +44,15 @@ class LanceController extends Controller
         if (!$leilao->esta_no_periodo_de_lances()) {
             return redirect()->route('leiloes.lances.store', $leilao)->with('error', 'Lances não podem ser realizados fora do intervalo do leilão');
         }
-        if(auth()->user()->investidor->leiloes()->contains($leilao)) {
-            $lance = Lance::where('investidor_id', auth()->user()->investidor->id)->where('leilao_id', $leilao->id)->first();
-            return redirect()->route('leiloes.lances.edit', ['leilao' => $leilao, 'lance' => $lance]);
+        if($leilao->investidor_fez_lance(auth()->user()->investidor)) {
+            return redirect()->back()->with('message', 'Você já realizou um lance, para alterar o valor atualize-o.');
         }
         $lance = new Lance();
         $lance->leilao()->associate($leilao);
         $lance->investidor()->associate(auth()->user()->investidor);
         $lance->valor = $request->validated()['valor'];
         $lance->save();
-        return redirect()->route('leiloes.lances.edit', ['leilao' => $leilao, 'lance' => $lance])->with('message', 'Lance realizado com sucesso');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Lance  $lance
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Lance $lance)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Lance  $lance
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Leilao $leilao, Lance $lance)
-    {
-        $leilao = $lance->leilao;
-        return view('leiloes.lances.edit', compact('leilao', 'lance'));
+        return redirect()->back()->with('message', 'Lance realizado com sucesso');
     }
 
     /**
@@ -104,11 +65,11 @@ class LanceController extends Controller
     public function update(UpdateLanceRequest $request, Leilao $leilao, Lance $lance)
     {
         if (!$leilao->esta_no_periodo_de_lances()) {
-            return redirect()->route('leiloes.lances.edit', ['leilao' => $leilao, 'lance' => $lance])->with('error', 'Lances não podem ser realizados fora do intervalo do leilão');
+            return redirect()->route('leiloes.lances.index', ['leilao' => $leilao, 'lance' => $lance])->with('error', 'Lances não podem ser realizados fora do intervalo do leilão');
         }
         $lance->valor = $request->validated()['valor'];
         $lance->save();
-        return redirect()->route('leiloes.lances.edit', ['leilao' => $leilao, 'lance' => $lance])->with('message', 'Lance realizado com sucesso');
+        return redirect()->back()->with('message', 'Lance realizado com sucesso');
     }
 
     /**

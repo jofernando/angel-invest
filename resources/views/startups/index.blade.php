@@ -45,7 +45,7 @@
                 @foreach ($startups as $startup)
                     <div class="col-md-4">
                         <div class="card card-startup mb-3">
-                            <div class="card-header">
+                            <div class="card-header" style="transform: rotate(0);">
                                 <div class="row">
                                     <div class="col-md-5" style="text-align: center;">
                                         <img class="img-circle" src="@if($startup->logo != null){{asset('storage/'.$startup->logo)}}@else{{asset('img/empresa-logo.svg')}}@endif" alt="Logo startup">
@@ -53,7 +53,7 @@
                                     <div class="col-md-7">
                                         <div class="row mt-2">
                                             <div class="col-md-12">
-                                                <a @if(!is_null($startup->endereco) && !is_null($startup->documentos->first())) href="{{route('startups.show', $startup)}}" @endif style="text-decoration: none; color: white;"><h5>{{$startup->nome}}</h5></a>
+                                                <a @if(!is_null($startup->endereco) && !is_null($startup->documentos->first()) && !is_null($startup->telefones->first())) href="{{route('startups.show', $startup)}}" @endif style="text-decoration: none; color: white;"><h5>{{$startup->nome}}</h5></a>
                                                 <span class="categoria">{{$startup->area->nome}}</span>
                                             </div>
                                             <div class="col-md-12">
@@ -67,11 +67,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if(!is_null($startup->endereco) && !is_null($startup->documentos->first()) && !is_null($startup->telefones->first()))
+                                    <a href="{{route('startups.show', $startup)}}" class="stretched-link"></a>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <a  @if(!is_null($startup->endereco) && !is_null($startup->documentos->first())) href="{{route('propostas.index', $startup)}}" @endif style="text-decoration: none; color: black; font-size: 20px;">Produtos</a>
+                                        <a  @if(!is_null($startup->endereco) && !is_null($startup->documentos->first()) && !is_null($startup->telefones->first())) href="{{route('propostas.index', $startup)}}" @endif style="text-decoration: none; color: black; font-size: 20px;">Produtos</a>
                                     </div>
                                     @if(is_null($startup->endereco) || is_null($startup->documentos->first()) || is_null($startup->telefones->first()))
                                         <small class="text-red">Conclua o cadastro da startup em <span style="font-weight: bold">Adicionar nova startup</span></small>

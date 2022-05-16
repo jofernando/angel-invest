@@ -28,7 +28,7 @@ class StoreStartupRequest extends FormRequest
             'nome' => ['required', 'string'],
             'descricao' => ['required', 'string'],
             'logo' => ['required', 'image', 'max:10240'],
-            'cnpj' => ['required', 'cnpj', 'unique:startups,cnpj'],
+            'cnpj' => ['nullable', 'cnpj', 'unique:startups,cnpj'],
             'email' => ['required', 'email'],
             'area' => ['required', 'numeric'],
         ];

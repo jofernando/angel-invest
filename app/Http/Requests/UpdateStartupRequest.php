@@ -29,7 +29,7 @@ class UpdateStartupRequest extends FormRequest
             'nome' => ['required', 'string'],
             'descricao' => ['required', 'string'],
             'logo' => ['nullable', 'image', 'max:10240'],
-            'cnpj' => ['required', 'cnpj', Rule::unique('startups')->ignore($this->route('startup'))],
+            'cnpj' => ['nullable', 'cnpj', Rule::unique('startups')->ignore($this->route('startup'))],
             'email' => ['required', 'email'],
             'area' => ['required', 'numeric'],
         ];

@@ -1,11 +1,11 @@
 <x-guest-layout>
-    <div id="container-home" class="container" style="margin-top: 40px;">
-        <div class="col-md-12">
+    <div id="container-home" class="container" style="margin-top: 40px; display: flex; justify-content: center;">
+        <div class="col-md-10">
             <div class="card card-register mb-3" style="max-width: 100%;">
                 <div id="card-container" class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div id="colum-img" class="col-md-5">
+                            <div id="colum-img" class="col-md-12">
                                 <div class="row">
                                     <div id="top-img-div" class="col-md-12"></div>
                                 </div>
@@ -19,11 +19,11 @@
                                         <div id="btn-div" class="row">
                                             <div class="col-md-12">
                                                 <div class="row">
-                                                    <div id="text-bnt-users" class="col-md-12 text-users">
+                                                    <div id="text-bnt-users" class="text-users" style="font-weight: bold; font-size: 20px; margin-top: 0px;">
                                                         Você é... ?
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" style=" margin-top: -15px;">
                                                     <div class="col-md-12">
                                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                             <button id="btn-entrepreneur" class="btn btn-outline-investidor-empreendedor @if(old('profile') == \App\Models\User::PROFILE_ENUM['investor']) @else selected @endif" type="button" onclick="alterar_img('{{asset('img/empreendedor-preto.svg')}}', 'entrepreneur-registration')">Empreendedor</button>
@@ -33,42 +33,43 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row justify-content-center" style="margin-top: 17px;">
-                                            <div id="text-entrepreneur" class="col-md-12 text-users" style="height: 50px;">
-                                                Cadastrando-se como empreendedor, você poderá adicionar uma startup e publicar a sua proposta de negócio. Então assim poderá deixar sua proposta visível para que investidores possam fazer ofertas.
-                                            </div>
-                                            <div id="text-investor" class="col-md-12 text-users" style="display: none; height: 50px;">
-                                                Cadastrando-se como investidor-anjo, você poderá fazer uma oferta às startups do seu interesse que tenham publicado uma proposta. 
+                                        <div class="row">
+                                            <div class="col-md-12" style="margin-top: 17px;">
+                                                <div id="text-entrepreneur" class="text-users">
+                                                    Cadastrando-se como empreendedor, você poderá adicionar uma startup e cadastrar um produto do seu negócio. Então assim poderá deixar seu produto visível para que investidores possam fazer ofertas.
+                                                </div>
+                                                <div id="text-investor" class="text-users" style="display: none;">
+                                                    Cadastrando-se como investidor-anjo, você poderá fazer uma oferta às startups do seu interesse que tenham publicado um produto. 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-7">
                                 <div class="card-body">
                                     <div id="form-registration" class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 id="investor-registration" class="card-title" style="display: none;">Cadastro de <span style="color: rgb(41, 103, 129);">investidor-anjo</span></h3>
-                                                <h3 id="entrepreneur-registration" class="card-title">Cadastro de <span style="color: rgb(41, 103, 129);">empreendedor</span></h3>
-                                            </div>
-                                        </div>
-                                        <form id="form-registration-user" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                        <form id="form-registration-user" method="POST" action="{{ route('register') }}" enctype="multipart/form-data"  style="text-align: left;">
                                             @csrf
                                             <input id="profile" type="hidden" name="profile" value="{{\App\Models\User::PROFILE_ENUM['entrepreneur']}}">
-                                            <div class="row mb-3" style="text-align: right;">
-                                                <div class="col-md-9"></div>
-                                                <div class="col-md-3" style="text-align: center">
-                                                    <label id="label-photo" for="foto_do_perfil" class="form-label">Foto do perfil</label>
-                                                    <img id="input-profile-photo" src="img/perfil.svg" alt="Imagem default perfil" onclick="click_file_input()">
-                                                    <div style="display: none;">
-                                                        <input id="foto_do_perfil" name="foto_do_perfil" type="file" class="form-control" accept=".png, .jpg">
-                                                    </div>
-                                                    @error('foto_do_perfil')
-                                                        <div id="validationServer03Feedback" class="invalid-feedback">
-                                                            {{ $message }}
+                                            <div class="row mb-3">
+                                                <div class="col-md-9">
+                                                    <h3 id="investor-registration" class="card-title" style="display: none;">Cadastro de <span style="color: rgb(41, 103, 129);">investidor-anjo</span></h3>
+                                                    <h3 id="entrepreneur-registration" class="card-title">Cadastro de <span style="color: rgb(41, 103, 129);">empreendedor</span></h3>
+                                                </div>
+                                                <div class="col-md-3" style="text-align: rigth;">
+                                                    <div style="text-align: center">
+                                                        <div class="row">
+                                                            <label id="label-photo" for="foto_do_perfil" class="form-label">Foto do perfil</label>
                                                         </div>
-                                                    @enderror
+                                                        <img id="input-profile-photo" src="img/perfil.svg" alt="Imagem default perfil" onclick="click_file_input()">
+                                                        <div style="display: none;">
+                                                            <input id="foto_do_perfil" name="foto_do_perfil" type="file" class="form-control" accept=".png, .jpg">
+                                                        </div>
+                                                        @error('foto_do_perfil')
+                                                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row" style="text-align: right;">
@@ -147,11 +148,12 @@
                                                             {{ $message }}
                                                         </div>
                                                     @enderror
-                                                    <small id="password-minimo"> Deve ter no mínimo 8 caracteres </small>
+                                                    <div class="row col-md-12" id="strengthMessage"></div> 
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="password-confirmation" class="form-label">Confirmar senha <span style="color: red;">*</span></label>
                                                     <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" required>
+                                                    <div class="row col-md-12" id="passwordMessage"></div> 
                                                 </div>
                                             </div>
                                             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -178,8 +180,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div id="bottom-img" class="col-md-5"></div>
-                            <div id="bottom-form" class="col-md-7"></div>
+                            <div id="bottom-form" class="col-md-12"></div>
                         </div>
                     </div>
                 </div>
@@ -187,6 +188,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/check-password.js') }}"></script>
     <script>
         $(document).ready(function($) {
             $('#cpf').mask('000.000.000-00');

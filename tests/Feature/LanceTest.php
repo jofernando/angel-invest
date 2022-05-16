@@ -66,6 +66,7 @@ class LanceTest extends TestCase
     {
         $this->followingRedirects();
         $this->userInvestidor->investidor->update(['carteira' => $this->leilao->valor_minimo + 1]);
+        $this->actingAs($this->userInvestidor)->get(route('propostas.show', ['startup' => $this->startup, 'proposta' => $this->proposta]));
         $response = $this->actingAs($this->userInvestidor)->post(
             route('leiloes.lances.store', ['leilao' => $this->leilao]),
             ['valor' => number_format(floatval($this->leilao->valor_minimo) + 1, 2,",",".")]

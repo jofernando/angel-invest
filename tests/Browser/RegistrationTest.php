@@ -29,6 +29,7 @@ class RegistrationTest extends DuskTestCase
             $browser->select('sexo', User::SEXO_ENUM['feminine'])
                     ->type('password', 'password')
                     ->type('password_confirmation', 'password')
+                    ->waitForText('Tudo ok!')
                     ->check('termos')
                     ->press('Cadastrar')
                     ->assertSee('Minhas startups');
@@ -48,6 +49,7 @@ class RegistrationTest extends DuskTestCase
             $browser->select('sexo', User::SEXO_ENUM['feminine'])
                     ->type('password', 'password')
                     ->type('password_confirmation', 'passwords')
+                    ->waitForText('As senhas não são iguais!')
                     ->check('termos')
                     ->press('Cadastrar')
                     ->waitForText('Cadastro')

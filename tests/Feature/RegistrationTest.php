@@ -50,7 +50,7 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $response->assertRedirect('/startups');
     }
 
     public function test_new_user_filling_in_wrong_cpf() {

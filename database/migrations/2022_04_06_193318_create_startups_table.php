@@ -17,7 +17,7 @@ class CreateStartupsTable extends Migration
             $table->id();
             $table->string('nome');
             $table->text('descricao');
-            $table->string('cnpj')->unique();
+            $table->string('cnpj')->unique()->nullable();
             $table->string('email');
             $table->string('logo');
             $table->foreignId('user_id')->constrained();

@@ -143,13 +143,13 @@ body img {
   background-color: var(--color-img-backgroud);
   border-radius: 50% !important;
   padding: 10px;
-  height: 300px;
-  width: 300px;
+  height: 170px;
+  width: 170px;
   margin-top: -75px;
 }
 
 #top-img-div {
-  height: 150px;
+  height: 100px;
   width: 100%;
   background-color: var(--ternary-color);
 }
@@ -157,7 +157,7 @@ body img {
 #bottom-img-div {
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 75%;
+  padding-bottom: 1%;
   background-color: var(--color-background-create-user);
 }
 
@@ -362,6 +362,10 @@ button:disabled {
   background-color: #296781;
 }
 
+.btn-yellow {
+  background-color: #ebca2a;
+}
+
 .btn-padding {
   padding-left: 30px;
   padding-right: 30px;
@@ -377,6 +381,14 @@ button:disabled {
 
 .btn-default:focus {
   background-color: var(--ternary-color);
+}
+
+.btn-yellow:hover {
+  background-color: #b18f20;
+}
+
+.btn-yellow:focus {
+  background-color: #b18f20;
 }
 
 .span-btn-add {
@@ -803,3 +815,67 @@ label {
   transition: background-size .2s ease-in-out;
 }
 /* X VIDEO BUTTON PLAYER X */
+
+/* X VALIDACAO DE SENHA X */
+.Short {
+  width: 100%;
+  background-color: #dc3545;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  height: 3px;
+  color: #dc3545;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Weak {
+  width: 100%;
+  background-color: #ffc107;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  height: 3px;
+  color: #ffc107;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Good {
+  width: 100%;
+  background-color: #28a745;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  height: 3px;
+  color: #28a745;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Strong {
+  width: 100%;
+  background-color: #007fd3;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  height: 3px;
+  color: #007fd3;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Invalida {
+  color: #dc3545;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Valida {
+  color: #28a745;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* X VALIDACAO DE SENHA X */
+/* PAGAMENTO */
+.card-carteira {
+  background-color: var(--ternary-color) !important;
+}
+/* X PAGAMENTO X */

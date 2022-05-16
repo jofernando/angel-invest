@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Artistas\PagSeguro\PagSeguroServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -217,6 +217,9 @@ return [
         'Mail' => Illuminate\Support\Facades\Mail::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
+        'PagSeguro' => Artistas\PagSeguro\PagSeguroFacade::class,
+        'PagSeguroRecorrente' => Artistas\PagSeguro\PagSeguroRecorrenteFacade::class,
+        'PagSeguroBoleto' => Artistas\PagSeguro\PagSeguroBoletoFacade::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'RateLimiter' => Illuminate\Support\Facades\RateLimiter::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
@@ -231,6 +234,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
 
     ],
 
