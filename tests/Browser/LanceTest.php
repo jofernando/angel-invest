@@ -19,6 +19,7 @@ class LanceTest extends DuskTestCase
             $leilao = $this->criar_leilao($user);
             $browser->loginAs($user)
                 ->visit(route('propostas.show', ['proposta' => $leilao->proposta, 'startup' => $leilao->proposta->startup]))
+                ->waitForText('Nenhum lance realizado',15)
                 ->assertSee('Nenhum lance realizado');
         });
     }
@@ -33,6 +34,7 @@ class LanceTest extends DuskTestCase
                 ->visit(route('leiloes.lances.create', ['leilao' => $leilao]))
                 ->typeSlowly('valor', number_format($leilao->valor_minimo, 2,",","."))
                 ->press('Fazer lance')
+                ->waitForText('Lance realizado com sucesso',15)
                 ->assertSee('Lance realizado com sucesso');
         });
     }
