@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\StartupController;
 use App\Http\Controllers\EnderecoController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\TelefoneController;
 use App\Http\Controllers\LeilaoController;
 use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\WelcomeController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Builder\Function_;
 
@@ -35,6 +37,13 @@ Route::middleware([
     /*Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');*/
+
+    Route::get('/chat/{user}', function (User $user) {
+        return view('chat.chat', compact('user'));
+    })->name('chat');
+
+    Route::get('/chat', ChatController::class)->name('chat.index');
+
     Route::resource('startups', StartupController::class);
 
     Route::get('/get-component', [StartupController::class, 'startupGetComponent'])->name('startup.component.ajax');

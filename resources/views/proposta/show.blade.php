@@ -97,6 +97,13 @@
                                             <span style="font-weight: bolder;">Telefone: </span> @if($startup->telefones->first() != null) {{$startup->telefones->first()->numero}} @else (##) #####-#### @endif
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="{{route('chat', $startup->user)}}" class="btn btn-success btn-color-dafault mb-4">
+                                                {{ __('Chat privado') }}
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
