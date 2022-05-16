@@ -74,7 +74,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <a  @if(!is_null($startup->endereco) && !is_null($startup->documentos->first()) && !is_null($startup->telefones->first())) href="{{route('propostas.index', $startup)}}" @endif style="text-decoration: none; color: black; font-size: 20px;">Produtos</a>
+                                        <a  @if(!is_null($startup->endereco) && !is_null($startup->documentos->first()) && !is_null($startup->telefones->first())) href="{{route('propostas.index', $startup)}}" @endif style="text-decoration: none; color: black; font-size: 20px;">Meus Produtos</a>
                                     </div>
                                     @if(is_null($startup->endereco) || is_null($startup->documentos->first()) || is_null($startup->telefones->first()))
                                         <small class="text-red">Conclua o cadastro da startup em <span style="font-weight: bold">Adicionar nova startup</span></small>

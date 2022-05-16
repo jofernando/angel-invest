@@ -43,7 +43,7 @@
                 <div class="card text-white bg-success card-carteira ml-3 mb-3" style="max-width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Quantia de créditos na carteira</h5>
-                        <p class="card-text">R$ {{auth()->user()->investidor->carteira}}</p>
+                        <p class="card-text">R$ {{number_format(auth()->user()->investidor->carteira, 2, ',', '.')}}</p>
                     </div>
                 </div>
             </div>

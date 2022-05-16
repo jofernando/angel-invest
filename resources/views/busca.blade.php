@@ -24,7 +24,7 @@
     </head>
     <body>
         @component('layouts.nav_bar')@endcomponent
-        
+
         <form method="GET" action="{{route('produto.search')}}">
             <div id="container-search" class="container-fluid">
                 <div class="row justify-content-center search-box">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-12">
                         <button class="arrow-collapse" type="button" data-bs-toggle="collapse" href="#collapse-search" role="button" aria-expanded="@if($request->avancada == 1) true @else false @endif" aria-controls="collapse-search">
-                            @if($request->avancada == 1) <img src="{{asset('img/arrow-white-up.svg')}}" alt="Ícone da busca avançada"> @else <img src="{{asset('img/arrow-white-down.svg')}}" alt="Ícone da busca avançada"> @endif                    
+                            @if($request->avancada == 1) <img src="{{asset('img/arrow-white-up.svg')}}" alt="Ícone da busca avançada"> @else <img src="{{asset('img/arrow-white-down.svg')}}" alt="Ícone da busca avançada"> @endif
                         </button>
                     </div>
                     <div class="col-md-10">
@@ -140,7 +140,7 @@
                                             @endif
                                         </div>
                                         <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
-                                            <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
+                                            <span class="span-area-startup" style="color: black;">{{$leilao->proposta->startup->area->nome}}</span>
                                         </div>
                                     </div>
                                     <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
@@ -195,7 +195,7 @@
                                             @endif
                                         </div>
                                         <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
-                                            <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
+                                            <span class="span-area-startup" style="color: black;">{{$leilao->proposta->startup->area->nome}}</span>
                                         </div>
                                     </div>
                                     <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
@@ -270,7 +270,7 @@
                                         @endif
                                     </div>
                                     <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
-                                        <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
+                                        <span class="span-area-startup" style="color: black;">{{$leilao->proposta->startup->area->nome}}</span>
                                     </div>
                                 </div>
                                 <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
@@ -350,8 +350,7 @@
                 }
             }
 
-            cores = ['#00ffff', '#7fffd4', '#8a2be2', '#a52a2a', '#5f9ea0', '#6495ed', '#008b8b', '#bdb76b', '#ff8c00', 
-                        '#483d8b', '#8fbc8f', '#2f4f4f', '#ffd700', '#20b2aa', '#ffa07a', '#87cefa', '#66cdaa', '#9370db', '#3cb371', '#191970'];
+            cores = [ '#7fffd4'];
             function gerar_cor() {
                 return cores[parseInt(Math.random() * cores.length)];
             }

@@ -45,7 +45,7 @@
                             <div class="row area-startup" style="margin-top: -24px;">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
-                                    <span class="span-area-startup" style="color: white;">{{$startup->area->nome}}</span>
+                                    <span class="span-area-startup" style="color: black;">{{$startup->area->nome}}</span>
                                 </div>
                             </div>
                             <a class="video-link" href="{{route('propostas.show', ['startup' => $startup, 'proposta' => $proposta])}}">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                 @endforeach
-            @else 
+            @else
                 <div class="col-md-12">
                     <div class="p-5 mb-4 bg-light rounded-3">
                         <div class="container-fluid py-5">
@@ -108,6 +108,6 @@
                     </div>
                 </div>
             @endif
-        </div>   
+        </div>
     </div>
 </x-app-layout>

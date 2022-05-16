@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="container-fluid">
             <div id="row-startups" class="row">
                 <div class="col-md-12">
@@ -49,7 +49,7 @@
                                 <div class="row area-startup" style="margin-top: -24px;">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-8" style="text-align: right; position: relative; right: 10px;">
-                                        <span class="span-area-startup" style="color: white;">{{$leilao->proposta->startup->area->nome}}</span>
+                                        <span class="span-area-startup" style="color: black;">{{$leilao->proposta->startup->area->nome}}</span>
                                     </div>
                                 </div>
                                 <a id="idshowvideo{{$leilao->id}}" class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
@@ -95,26 +95,25 @@
                 @endif
             </div>
         </div>
-        
+
         @component('layouts.footer')@endcomponent
 
         <script>
             $(document).ready(function(){
                 categories = document.getElementsByClassName('span-area-startup');
                 qtd_investor = document.getElementsByClassName('qtd-investor');
-    
+
                 gerar_cores(categories);
                 gerar_cores(qtd_investor);
             });
-    
+
             function gerar_cores(html_colletion) {
                 for(i = 0; i < html_colletion.length; i++) {
                     html_colletion[i].style.backgroundColor = gerar_cor();
                 }
             }
-    
-            cores = ['#00ffff', '#7fffd4', '#8a2be2', '#a52a2a', '#5f9ea0', '#6495ed', '#008b8b', '#bdb76b', '#ff8c00', 
-                     '#483d8b', '#8fbc8f', '#2f4f4f', '#ffd700', '#20b2aa', '#ffa07a', '#87cefa', '#66cdaa', '#9370db', '#3cb371', '#191970'];
+
+            cores = [ '#7fffd4'];
             function gerar_cor() {
                 return cores[parseInt(Math.random() * cores.length)];
             }

@@ -26,7 +26,7 @@
                                     <div class="row area-startup" style="margin-top: -24px;">
                                         <div class="col-md-4"></div>
                                         <div class="col-md-8" style="text-align: right; position: relative; right: 10px; top: 23px;">
-                                            <span class="span-area-startup" style="color: white;">{{$lance->leilao->proposta->startup->area->nome}}</span>
+                                            <span class="span-area-startup" style="color: black;">{{$lance->leilao->proposta->startup->area->nome}}</span>
                                         </div>
                                     </div>
                                     <a class="" href="{{route('propostas.show', ['startup' => $lance->leilao->proposta->startup, 'proposta' => $lance->leilao->proposta])}}">
@@ -134,11 +134,11 @@
                     </div>
                 </div>
             @empty
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin-bottom: 90px;">
                     <div class="p-5 mb-5 mt-4 bg-light rounded-3">
                         <div class="container-fluid py-5">
                             <h1 class="display-5 fw-bold">Investimentos</h1>
-                            <p class="col-md-8 fs-4">Nenhum lance efutado</p>
+                            <p class="col-md-8 fs-4">Nenhum lance efetuado</p>
                         </div>
                     </div>
                 </div>
@@ -154,8 +154,7 @@
         </script>
     @endif
     <script>
-        cores = ['#00ffff', '#7fffd4', '#8a2be2', '#a52a2a', '#5f9ea0', '#6495ed', '#008b8b', '#bdb76b', '#ff8c00',
-                 '#483d8b', '#8fbc8f', '#2f4f4f', '#ffd700', '#20b2aa', '#ffa07a', '#87cefa', '#66cdaa', '#9370db', '#3cb371', '#191970'];
+        cores = [ '#7fffd4'];
 
         $(document).ready(function(){
             $('.span-area-startup').each(function(index, element) {
