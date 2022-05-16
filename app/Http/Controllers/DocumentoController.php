@@ -105,7 +105,7 @@ class DocumentoController extends Controller
             $validator = Validator::make(
                 $input_data, [
                     'documentos.*' => ['file','max:5120','mimes:pdf'],
-                    'nomes.*' => ['max:255']
+                    'nomes.*' => ['required','max:255']
                 ],[
                     'documentos.*.required' => 'O arquivo é obrigatório.',
                     'documentos.*.max' => 'O tamanho máximo do arquivo é 5MB.',
