@@ -27,7 +27,7 @@
                                 <h2>Informações básicas</h2>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{route('startups.edit', ['startup' => $startup])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar produto"> Editar</a>
+                                <a id="ed-info" href="{{route('startups.edit', ['startup' => $startup])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar produto"> Editar</a>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                 <h2>Endereço</h2>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{route('enderecos.edit', ['startup' => $startup, 'endereco' => $startup->endereco])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar produto"> Editar</a>
+                                <a id='ed-endereco' href="{{route('enderecos.edit', ['startup' => $startup, 'endereco' => $startup->endereco])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar produto"> Editar</a>
                             </div>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                                 <h2>Documentos</h2>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{route('documentos.edit', ['startup' => $startup])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar produto"> Editar</a>
+                                <a id="ed-docs" href="{{route('documentos.edit', ['startup' => $startup])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar produto"> Editar</a>
                             </div>
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                                 <h2>Telefones</h2>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{route('telefones.edit', ['startup' => $startup])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar proposta"> Editar</a>
+                                <a id="ed-telefone" href="{{route('telefones.edit', ['startup' => $startup])}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/edit.svg')}}" alt="Icone de editar proposta"> Editar</a>
                             </div>
                         </div>
                     </div>

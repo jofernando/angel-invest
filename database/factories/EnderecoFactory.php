@@ -39,13 +39,13 @@ class EnderecoFactory extends Factory
         $complementos = array("Apartamento", "Bloco F", "Casa", "Bloco A");
 
         $endereco = new Endereco();
-        $endereco->cep = array_rand($ceps);
-        $endereco->rua = array_rand($ruas);
-        $endereco->bairro = array_rand($bairros);
-        $endereco->numero = array_rand($numeros);;
-        $endereco->estado = array_rand($estados);;
-        $endereco->cidade = array_rand($cidades);;
-        $endereco->complemento = array_rand($complementos);;
+        $endereco->cep = $ceps[array_rand($ceps)];
+        $endereco->rua = $ruas[array_rand($ruas)];
+        $endereco->bairro = $bairros[array_rand($bairros)];
+        $endereco->numero = $numeros[array_rand($numeros)];
+        $endereco->estado = $estados[array_rand($estados)];
+        $endereco->cidade = $cidades[array_rand($cidades)];
+        $endereco->complemento = $complementos[array_rand($complementos)];
         $endereco->startup_id = $startup->id;
         $endereco->save();
 

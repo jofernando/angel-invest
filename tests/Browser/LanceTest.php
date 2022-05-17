@@ -19,7 +19,9 @@ class LanceTest extends DuskTestCase
             $leilao = $this->criar_leilao($user);
             $browser->loginAs($user)
                 ->visit(route('propostas.show', ['proposta' => $leilao->proposta, 'startup' => $leilao->proposta->startup]))
+                ->waitForText('Nenhum lance realizado',15)
                 ->assertSee('Nenhum lance realizado');
+            $this->resetar_session();
         });
     }
 
@@ -35,7 +37,9 @@ class LanceTest extends DuskTestCase
                 ->waitForText('Valor do lance')
                 ->typeSlowly('valor', number_format($leilao->valor_minimo, 2,",","."))
                 ->press('Fazer lance')
+                ->waitForText('Lance realizado com sucesso',15)
                 ->assertSee('Lance realizado com sucesso');
+            $this->resetar_session();
         });
     }
 
@@ -51,8 +55,9 @@ class LanceTest extends DuskTestCase
                 ->waitForText('Valor do lance')
                 ->typeSlowly('valor', number_format($leilao->valor_minimo, 2,",","."))
                 ->press('Fazer lance')
-                ->waitForText('Valor do lance')
+                ->waitForText('Você não possui AnjoCoins suficientes para realizar o lance',15)
                 ->assertSee('Você não possui AnjoCoins suficientes para realizar o lance');
+            $this->resetar_session();
         });
     }
 }

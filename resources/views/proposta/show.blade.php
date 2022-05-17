@@ -113,8 +113,8 @@
                                 @endif
                                 @forelse ($leilao->lances as $index => $lance)
                                     @if($index < $leilao->numero_ganhadores)
-                                        @if(auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id)
-                                            @include('leiloes.lances.edit', ['leilao' => $proposta->leilao_atual(), 'lance' => $lance])
+                                        @if (auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id && $proposta->leilao_atual() != null && $lance->leilao->id == $proposta->leilao_atual()->id)
+                                            @include('leiloes.lances.edit', ['leilao' => $lance->leilao, 'lance' => $lance])
                                         @endif
                                         <div @class([
                                                 'w-1/2' => $index == 1 || $index == 2,
@@ -165,7 +165,7 @@
                                                         <img src="{{asset('img/dolar-white.svg')}}" width="35px" alt="">
                                                         <span style="text-shadow: 2px 1px 4px rgb(49, 49, 21); font-size: 18px;">Atualizar lance</span>
                                                     </button>
-                                                    
+
                                                 @else
                                                     @include('leiloes.lances.create', ['leilao' => $proposta->leilao_atual()])
                                                     <button class="btn btn-success btn-yellow btn-padding border" style="width: 100%" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -208,9 +208,7 @@
         </script>
     @endif
     <script>
-        cores = ['#00ffff', '#7fffd4', '#8a2be2', '#a52a2a', '#5f9ea0', '#6495ed', '#008b8b', '#bdb76b', '#ff8c00',
-                 '#483d8b', '#8fbc8f', '#2f4f4f', '#ffd700', '#20b2aa', '#ffa07a', '#87cefa', '#66cdaa', '#9370db', '#3cb371', '#191970'];
-
+        cores = [ '#7fffd4'];
         $(document).ready(function(){
             categoria = document.getElementById('span-area-proposta-startup');
 
