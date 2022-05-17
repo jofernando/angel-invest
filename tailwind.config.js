@@ -17,6 +17,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            height: {
+                chat: 'calc(100vh - 250px)'
+            },
         },
     },
 

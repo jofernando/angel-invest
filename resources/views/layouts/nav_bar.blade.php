@@ -28,6 +28,9 @@
                     <a class="nav-link" href="{{route('lances')}}">Meus investimentos</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('chat.index')}}">Mensagens</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('pagamento.index')}}">Carteira</a>
                 </li>
                 @endif
