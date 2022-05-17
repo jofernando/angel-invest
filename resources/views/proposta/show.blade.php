@@ -82,27 +82,27 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div>
-                                                Contato
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div>
-                                                <b>E-mail: </b> {{$startup->email}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span style="font-weight: bolder;">Telefone: </span> @if($startup->telefones->first() != null) {{$startup->telefones->first()->numero}} @else (##) #####-#### @endif
-                                            </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            Contato
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <a href="{{route('chat', $startup->user)}}" class="btn btn-success btn-color-dafault mb-4">
-                                            {{ __('Chat privado') }}
-                                        </a>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span style="font-weight: bolder;">E-mail: </span> {{$startup->email}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span style="font-weight: bolder;">Telefone: </span> @if($startup->telefones->first() != null) {{$startup->telefones->first()->numero}} @else (##) #####-#### @endif
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="{{route('chat', $startup->user)}}" class="btn btn-success btn-color-dafault mb-4">
+                                                {{ __('Chat privado') }}
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -119,10 +119,16 @@
                                     <p class="col-md-12 display-4 fw-bold" style="text-align: center; font-size: 20px;">@if($proposta->leilao_atual())Investidores contemplados no momento @else Investidores contemplados @endif</p>
                                 @endif
                                 @forelse ($leilao->lances as $index => $lance)
+                                    @if(auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id)
+                                        @include('leiloes.lances.edit', ['leilao' => $proposta->leilao_atual(), 'lance' => $lance])
+                                    @endif
                                     @if($index < $leilao->numero_ganhadores)
+<<<<<<< HEAD
                                         @if (auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id && $proposta->leilao_atual() != null && $lance->leilao->id == $proposta->leilao_atual()->id)
                                             @include('leiloes.lances.edit', ['leilao' => $lance->leilao, 'lance' => $lance])
                                         @endif
+=======
+>>>>>>> kelwin
                                         <div @class([
                                                 'w-1/2' => $index == 1 || $index == 2,
                                                 'w-full' => $index != 1 && $index != 2,
