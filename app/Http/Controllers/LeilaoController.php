@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\LeilaoRequest;
 use App\Models\Lance;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 
 class LeilaoController extends Controller
@@ -50,6 +51,11 @@ class LeilaoController extends Controller
             'termo_de_porcentagem_do_produto' => 'required|file|max:5120|mimes:pdf',
         ]);
 
+        $valor = $this->calcularValorTaxa($request);
+        if($valor == null){
+            return redirect()->back()->with('error', 'O período de datas não pode ultrapassar 178 dias.');
+        }
+
         $produto = Proposta::find($request->input('produto_do_leilão'));
         $this->authorize('userOwnsTheProposta', $produto);
 
@@ -63,7 +69,40 @@ class LeilaoController extends Controller
         $leilao->porcetagem_caminho = $this->salvar_termo_porcetagem($leilao, $request->file('termo_de_porcentagem_do_produto'));
         $leilao->update();
 
+        $investidor = auth()->user()->investidor;
+        $investidor->carteira -= $valor;
+        $investidor->update();
         return redirect(route('leilao.index'))->with('message', 'Leilão salvo com sucesso!');
+    }
+
+
+    public function calcularValorTaxa(Request $request)
+    {
+        $datetime1 = new DateTime($request->data_de_início);
+        $datetime2 = new DateTime($request->data_de_fim);
+        $interval = $datetime1->diff($datetime2);
+
+        $days = $interval->days;
+
+        if($days > 178){
+            return null;
+        }
+        $valor = $days/30;
+        if($valor < 1){
+            $valor = 1;
+        }
+
+        return $valor*4.20;
+    }
+
+    public function jsonReturnTaxa(Request $request)
+    {
+        $valor = $this->calcularValorTaxa($request);
+        $json = [
+            'valor' => $valor,
+        ];
+
+        return response()->json($json);
     }
 
     /**
@@ -92,7 +131,7 @@ class LeilaoController extends Controller
         $leilao = Leilao::find($id);
         $this->authorize('update', $leilao);
         $produtos = $this->produto_do_usuario();
-        
+
         return view('leilao.edit', compact('leilao', 'produtos'));
     }
 
@@ -141,7 +180,7 @@ class LeilaoController extends Controller
      *
      * @return Collect $propostas : Propostas que o empreendedor criou
      */
-    private function produto_do_usuario() 
+    private function produto_do_usuario()
     {
         $startups = auth()->user()->startups;
         return Proposta::whereIn('startup_id', $startups->pluck('id'))->orderBy('titulo')->get();
@@ -162,7 +201,7 @@ class LeilaoController extends Controller
      * Seta os atribudos do array passado no leilão
      *
      * @param Leilao $leilao : Leilão que terá os atributos setados
-     * @param array $array_inputs : Array com os atributos do leilão 
+     * @param array $array_inputs : Array com os atributos do leilão
      * @return void
      */
     private function set_atributos_no_leilao(Leilao $leilao, $array_inputs)
@@ -181,7 +220,7 @@ class LeilaoController extends Controller
      * @param UploadetFile $file : Arquivo que será salvo
      * @return void
      */
-    private function salvar_termo_porcetagem(Leilao $leilao, $file) 
+    private function salvar_termo_porcetagem(Leilao $leilao, $file)
     {
         if ($file != null) {
             $this->deletar_arquivo_termo($leilao);
@@ -216,7 +255,7 @@ class LeilaoController extends Controller
             $query = $query->orWhere([['id', '!=', $leilao->id], ['proposta_id', '=', $produto->id], ['data_inicio', '>=', $inicio], ['data_fim', '>=', $inicio], ['data_inicio', '<=', $fim], ['data_fim', '>=', $fim]]);
             return $query->first() ? true : false;
         }
-        
+
         $query = $query->where([['data_inicio', '>=', $inicio], ['proposta_id', $produto->id], ['data_fim', '>=', $inicio], ['data_inicio', '<=', $fim], ['data_fim', '<=', $fim]]);
         $query = $query->orWhere([['data_inicio', '<=', $inicio], ['proposta_id', $produto->id], ['data_fim', '>=', $inicio], ['data_inicio', '<=', $fim], ['data_fim', '>=', $fim]]);
         $query = $query->orWhere([['data_inicio', '<=', $inicio], ['proposta_id', $produto->id], ['data_fim', '>=', $inicio], ['data_inicio', '<=', $fim], ['data_fim', '<=', $fim]]);
