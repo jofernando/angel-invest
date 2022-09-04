@@ -5,7 +5,7 @@
                 <h4>Leilões</h4>
             </div>
             <div class="col-md-4" style="text-align: right;">
-                <span class="span-btn-add"><a href="{{route('leilao.create')}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/dolar-bag.svg')}}" alt="ìcone de adicionar nova produto"> Criar um leilão</a></span>
+                <span class="span-btn-add"><a href="{{route('leilao.create')}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/dolar-bag.svg')}}" alt="ìcone de adicionar nova produto"> Criar uma exibição do produto</a></span>
             </div>
         </div>
         <div class="row">
@@ -50,13 +50,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             @foreach ($leiloes as $leilao)
                                 <tr>
                                     <th scope="col">{{$leilao->id}}</th>
                                     <td><a href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">{{$leilao->proposta->titulo}}</a></td>
                                     <td>De {{date('d/m/Y', strtotime($leilao->data_inicio))}} até {{date('d/m/Y', strtotime($leilao->data_fim))}}</td>
-                                    <td><a class="btn btn-success btn-default btn-padding border" href="{{route('leilao.edit', $leilao)}}"><img src="{{asset('img/edit.svg')}}" alt="Icone de editar leilão">Editar</a><button id="btnmodaldelete{{$leilao->id}}" class="btn btn-danger btn-padding border" data-bs-toggle="modal" data-bs-target="#moda-delete-leilao-{{$leilao->id}}"> <img src="{{asset('img/trash-white.svg')}}" alt="Icone de deletar leilão" style="height: 20px;"> Deletar</button></td>
+                                    <td><a class="btn btn-success btn-default btn-padding border" href="{{route('leilao.edit', $leilao)}}"><img src="{{asset('img/edit.svg')}}" alt="Icone de editar exibição do produto">Editar</a><button id="btnmodaldelete{{$leilao->id}}" class="btn btn-danger btn-padding border" data-bs-toggle="modal" data-bs-target="#moda-delete-leilao-{{$leilao->id}}"> <img src="{{asset('img/trash-white.svg')}}" alt="Icone de deletar exibição do produto" style="height: 20px;"> Deletar</button></td>
                                 </tr>
 
                                 <div class="modal fade" id="moda-delete-leilao-{{$leilao->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -70,7 +70,7 @@
                                             <form id="form-deletar-proposta-{{$leilao->id}}" method="POST" action="{{route('leilao.destroy', $leilao)}}">
                                                 @csrf
                                                 @method('DELETE')
-                                                Tem certeza que deseja deletar o leilão #{{$leilao->id}} do produto {{$leilao->proposta->titulo}}?
+                                                Tem certeza que deseja deletar a exibição #{{$leilao->id}} do produto {{$leilao->proposta->titulo}}?
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -83,17 +83,17 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>                
-            @else 
+                </div>
+            @else
                 <div class="col-md-12">
                     <div class="p-5 mb-4 bg-light rounded-3">
                         <div class="container-fluid py-5">
                             <h1 class="display-5 fw-bold">Leilões</h1>
-                            <p class="col-md-8 fs-4">Para que seu produto seja exposto aos investidores é necessário criar um leilão. Leilões são como seus produtos são exibidos aos investidores para darem lances ao mesmo. <a href="{{route('leilao.create')}}">Clique aqui</a> para criar um leilão.</p>
+                            <p class="col-md-8 fs-4">Para que seu produto seja exposto aos investidores é necessário criar uma exibição do produto. <a href="{{route('leilao.create')}}">Clique aqui</a> para criar um exibição do produto.</p>
                         </div>
                     </div>
                 </div>
             @endif
-        </div>   
+        </div>
     </div>
 </x-app-layout>

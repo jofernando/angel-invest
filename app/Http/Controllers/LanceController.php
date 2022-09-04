@@ -43,7 +43,7 @@ class LanceController extends Controller
     {
         $investidor = auth()->user()->investidor;
         if (!$leilao->esta_no_periodo_de_lances()) {
-            return redirect()->route('leiloes.lances.store', $leilao)->with('error', 'Lances não podem ser realizados fora do intervalo do leilão');
+            return redirect()->route('leiloes.lances.store', $leilao)->with('error', 'Lances não podem ser realizados fora do intervalo de exibição do produto');
         }
         if($leilao->investidor_fez_lance($investidor)) {
             return redirect()->back()->with('message', 'Você já realizou um lance, para alterar o valor atualize-o.');
@@ -76,7 +76,7 @@ class LanceController extends Controller
         $investidor = auth()->user()->investidor;
 
         if (!$leilao->esta_no_periodo_de_lances()) {
-            return redirect()->route('leiloes.lances.index', ['leilao' => $leilao, 'lance' => $lance])->with('error', 'Lances não podem ser realizados fora do intervalo do leilão');
+            return redirect()->route('leiloes.lances.index', ['leilao' => $leilao, 'lance' => $lance])->with('error', 'Lances não podem ser realizados fora do intervalo de exibição do produto');
         }
 
         if($investidor->carteira < 10) {

@@ -18,7 +18,7 @@ class CreateLeilaoTest extends LeilaoTest
     {
         $produto = $this->criar_produto();
         $this->logar($produto->startup->user);
-        
+
         $data_inicio = date('Y-m-d', strtotime(now()->subDays(5)));
         $data_fim = date('Y-m-d', strtotime(now()->addDays(5)));
         $termo = UploadedFile::fake()->create('teste.pdf');
@@ -26,7 +26,7 @@ class CreateLeilaoTest extends LeilaoTest
         $response = $this->post(route('leilao.store'), $this->get_array_request($produto, 2000.0, 4, $data_inicio, $data_fim, $termo));
 
         $response->assertStatus(302);
-        $response->assertSessionHas('message', 'Leilão salvo com sucesso!');
+        $response->assertSessionHas('message', 'Exibição do produto salvo com sucesso!');
     }
 
     public function test_criar_leilao_sem_todas_as_informacoes()
@@ -59,7 +59,7 @@ class CreateLeilaoTest extends LeilaoTest
         $response = $this->post(route('leilao.store'), $this->get_array_request($produto, 2000.0, 4, $data_inicio, $data_fim, $termo));
 
         $response->assertStatus(302);
-        $response->assertSessionHas('message', 'Leilão salvo com sucesso!');
+        $response->assertSessionHas('message', 'Exibição do produto salvo com sucesso!');
 
         $data_inicio = date('Y-m-d', strtotime(now()->subDays(3)));
         $data_fim = date('Y-m-d', strtotime(now()->addDays(3)));
@@ -67,7 +67,7 @@ class CreateLeilaoTest extends LeilaoTest
 
         $response->assertStatus(302);
         $response->assertInvalid([
-            'leilao_existente' => 'Já existe um leilão para esse produto que engloba o período escolhido.',
+            'leilao_existente' => 'Já existe uma exibição para esse produto que engloba o período escolhido.',
         ]);
     }
 
@@ -83,14 +83,14 @@ class CreateLeilaoTest extends LeilaoTest
         $response = $this->post(route('leilao.store'), $this->get_array_request($produto, 2000.0, 4, $data_inicio, $data_fim, $termo));
 
         $response->assertStatus(302);
-        $response->assertSessionHas('message', 'Leilão salvo com sucesso!');
+        $response->assertSessionHas('message', 'Exibição do produto salvo com sucesso!');
 
         $data_inicio = date('Y-m-d', strtotime(now()->addDays(10)));
         $data_fim = date('Y-m-d', strtotime(now()->addDays(20)));
         $response = $this->post(route('leilao.store'), $this->get_array_request($produto, 3000.0, 5, $data_inicio, $data_fim, $termo));
 
         $response->assertStatus(302);
-        $response->assertSessionHas('message', 'Leilão salvo com sucesso!');
+        $response->assertSessionHas('message', 'Exibição do produto salvo com sucesso!');
     }
 
     public function test_criar_leilao_com_valores_negativos()

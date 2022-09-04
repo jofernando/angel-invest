@@ -31,7 +31,7 @@ class UpdateLeilaoTest extends LeilaoTest
         $response = $this->put(route('leilao.update', $leilao), $this->get_array_request($produto, 3000, 8, $data_inicio, $data_fim, $termo));
 
         $response->assertStatus(302);
-        $response->assertSessionHas('message', 'Leilão atualizado com sucesso!');
+        $response->assertSessionHas('message', 'Exibição do produto atualizado com sucesso!');
 
         $leilao = Leilao::find($leilao->id);
         $this->assertEquals($produto->id, $leilao->proposta_id);
@@ -52,15 +52,15 @@ class UpdateLeilaoTest extends LeilaoTest
         $response = $this->put(route('leilao.update', $leilao), $this->get_array_request($leilao->proposta, 4000, 2, $data_inicio, $data_fim, null));
 
         $response->assertStatus(302);
-        $response->assertSessionHas('message', 'Leilão atualizado com sucesso!');
+        $response->assertSessionHas('message', 'Exibição do produto atualizado com sucesso!');
 
         $leilao = Leilao::find($leilao->id);
-        
+
         $this->assertEquals(4000, $leilao->valor_minimo);
         $this->assertEquals(2, $leilao->numero_ganhadores);
     }
 
-    public function test_editar_leilao_para_um_produto_com_mesmo_periodo() 
+    public function test_editar_leilao_para_um_produto_com_mesmo_periodo()
     {
         $leilao1 = $this->criar_leilao();
         $this->logar($leilao1->proposta->startup->user);
@@ -71,14 +71,14 @@ class UpdateLeilaoTest extends LeilaoTest
         $data_fim = $leilao1->data_fim;
 
         $response = $this->put(route('leilao.update', $leilao2), $this->get_array_request($leilao1->proposta, 4000, 2, $data_inicio, $data_fim, null));
-        
+
         $response->assertStatus(302);
         $response->assertInvalid([
-            'leilao_existente' => 'Já existe um leilão para esse produto que engloba o período escolhido.',
+            'leilao_existente' => 'Já existe uma exibição para esse produto que engloba o período escolhido.',
         ]);
     }
 
-    public function test_editar_leilao_para_um_produto_com_periodo_diferente() 
+    public function test_editar_leilao_para_um_produto_com_periodo_diferente()
     {
         $leilao1 = $this->criar_leilao();
         $this->logar($leilao1->proposta->startup->user);
@@ -88,9 +88,9 @@ class UpdateLeilaoTest extends LeilaoTest
         $data_fim = date('Y-m-d', strtotime(now()->addDays(30)));
 
         $response = $this->put(route('leilao.update', $leilao2), $this->get_array_request($leilao1->proposta, 4000, 2, $data_inicio, $data_fim, null));
-        
+
         $response->assertStatus(302);
-        $response->assertSessionHas('message', 'Leilão atualizado com sucesso!');
+        $response->assertSessionHas('message', 'Exibição do produto atualizado com sucesso!');
 
         $leilao = Leilao::find($leilao2->id);
         $this->assertEquals($data_inicio, $leilao->data_inicio);

@@ -14,7 +14,7 @@ class UpdateLeilaoTest extends DuskTestCase
             $leilao = $this->criar_leilao();
             $this->login($browser, $leilao->proposta->startup->user);
             $browser->visitRoute('leilao.edit', $leilao)
-                    ->assertSee('Editando o leilão #'.$leilao->id.' do produto '.$leilao->proposta->titulo);
+                    ->assertSee('Editando a exibição #'.$leilao->id.' do produto '.$leilao->proposta->titulo);
             $this->resetar_session();
         });
     }
@@ -33,11 +33,11 @@ class UpdateLeilaoTest extends DuskTestCase
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(10))) . "'");
             $browser->attach('termo_de_porcentagem_do_produto', __DIR__ . '/file/pdf-test.pdf')
                     ->click('#salvar')
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão atualizado com sucesso!');
+                    ->waitForText('Criar uma exibição do produto')
+                    ->assertSee('Exibição do produto atualizado com sucesso!');
             $this->resetar_session();
         });
-        
+
     }
 
     public function test_editar_leilao_alterando_alguns_campos()
@@ -51,13 +51,13 @@ class UpdateLeilaoTest extends DuskTestCase
                     ->type('valor_mínimo', "3000")
                     ->type('número_de_ganhadores', 5)
                     ->click('#salvar')
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão atualizado com sucesso!');
+                    ->waitForText('Criar uma exibição do produto')
+                    ->assertSee('Exibição do produto atualizado com sucesso!');
             $this->resetar_session();
         });
     }
 
-    public function test_editar_leilao_para_um_produto_com_mesmo_periodo() 
+    public function test_editar_leilao_para_um_produto_com_mesmo_periodo()
     {
         $this->browse(function (Browser $browser) {
             $leilao1 = $this->criar_leilao();
@@ -74,13 +74,13 @@ class UpdateLeilaoTest extends DuskTestCase
                     ->script("document.querySelector('input[name=data_de_início]').value = '". $data_inicio . "'");
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". $data_fim . "'");
             $browser->click('#salvar')
-                    ->waitForText('Editando o leilão #'.$leilao2->id.' do produto '.$leilao2->proposta->titulo)
-                    ->assertSee('Já existe um leilão para esse produto que engloba o período escolhido.');
+                    ->waitForText('Editando o exibição do produto #'.$leilao2->id.' do produto '.$leilao2->proposta->titulo)
+                    ->assertSee('Já existe uma exibição para esse produto que engloba o período escolhido.');
             $this->resetar_session();
         });
     }
 
-    public function test_editar_leilao_para_um_produto_com_periodo_diferente() 
+    public function test_editar_leilao_para_um_produto_com_periodo_diferente()
     {
         $this->browse(function (Browser $browser) {
             $leilao1 = $this->criar_leilao();
@@ -97,8 +97,8 @@ class UpdateLeilaoTest extends DuskTestCase
                     ->script("document.querySelector('input[name=data_de_início]').value = '". $data_inicio . "'");
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". $data_fim . "'");
             $browser->click('#salvar')
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão atualizado com sucesso!');
+                    ->waitForText('Criar um exibição do produto')
+                    ->assertSee('Exibição do produto atualizado com sucesso!');
             $this->resetar_session();
         });
     }

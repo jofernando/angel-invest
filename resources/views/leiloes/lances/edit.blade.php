@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5>Alterando o lance para o leilão do produto {{ $leilao->proposta->startup->nome }}</h5>
+                <h5>Alterando o lance para a exibição do produto {{ $leilao->proposta->startup->nome }}</h5>
                 <button type="button" class="btn-close mr-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body bg-azul ">

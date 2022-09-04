@@ -73,7 +73,7 @@
                                     <div class="col-md-3 mt-4">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <label for="">Leilão</label>
+                                                <label for="">Exibição do produto</label>
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -126,7 +126,7 @@
                 <div class="container-fluid mt-4">
                     <div class="row">
                         <div class="col-md-12 titulo-pag">
-                            <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h5 style="font-weight: bolder;">Produtos em leilão</h5></a>
+                            <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h5 style="font-weight: bolder;">Produtos em exibição</h5></a>
                         </div>
                     </div>
                     <div id="row-cards-startups" class="row" style="background-color: white">
@@ -181,7 +181,7 @@
                 <div class="container-fluid mt-4">
                     <div class="row">
                         <div class="col-md-12 titulo-pag">
-                            <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h5 style="font-weight: bolder;">Produtos com leilão encerrado</h5></a>
+                            <a href="{{route('produto.search')}}" style="text-decoration: none; color:black;"><h5 style="font-weight: bolder;">Produtos com exibição encerrado</h5></a>
                         </div>
                     </div>
                     <div id="row-cards-startups" class="row" style="background-color: white">
@@ -245,7 +245,7 @@
                         <div class="p-5 mb-4 bg-light rounded-3">
                             <div class="container-fluid py-5">
                                 <h1 class="display-5 fw-bold">Produtos</h1>
-                                <p class="col-md-8 fs-4">Não foram encontrados produtos com leilão para essa busca.
+                                <p class="col-md-8 fs-4">Não foram encontrados produtos em exibição para essa busca.
                             </div>
                         </div>
                     </div>
@@ -308,7 +308,7 @@
                             <div class="col-md-12 mt-4">
                                 <div class="p-5 mb-4 bg-light rounded-3">
                                     <div class="container-fluid py-5">
-                                        <p class="col-md-8 fs-4">Não foram encontrados produtos com leilão para essa busca :(
+                                        <p class="col-md-8 fs-4">Não foram encontrados produtos em exibição para essa busca
                                     </div>
                                 </div>
                             </div>

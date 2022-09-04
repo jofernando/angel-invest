@@ -43,7 +43,7 @@
                                     <div class="row mb-4 pl-3 mt-3">
                                         @if ($leilao = $lance->leilao)
                                             <div>
-                                                <span class="text-proposta" style="font-size: 14px"><img class="icon" src="{{asset('img/calendar.svg')}}" alt="Ícone de calendario"> Período do leilão: <b>{{date('d/m', strtotime($leilao->data_inicio))}} a {{date('d/m', strtotime($leilao->data_fim))}}</b></span>
+                                                <span class="text-proposta" style="font-size: 14px"><img class="icon" src="{{asset('img/calendar.svg')}}" alt="Ícone de calendario"> Período de exibição do produto: <b>{{date('d/m', strtotime($leilao->data_inicio))}} a {{date('d/m', strtotime($leilao->data_fim))}}</b></span>
                                             </div>
                                             <div>
                                                 <span class="text-proposta" style="font-size: 14px"><img class="icon" src="{{asset('img/preco.svg')}}" alt="Ícone de lance mínimo"> Lance mínimo: <b>R$ {{number_format($leilao->valor_minimo, 2,",",".")}}</b></span>

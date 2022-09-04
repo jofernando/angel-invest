@@ -3,8 +3,8 @@
         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
             <div class="col-md-6">
                 <span class="span-btn-add" id="btn-adicionar-escolhar" onclick="addDoc()">
-                  <a class="btn btn-success btn-default btn-padding border"> 
-                    <img src="{{asset('img/add-document.svg')}}" alt=""> 
+                  <a class="btn btn-success btn-default btn-padding border">
+                    <img src="{{asset('img/add-document.svg')}}" alt="">
                     Novo documento
                   </a>
                 </span>
@@ -16,7 +16,7 @@
         <div class="row">
             <p>
                 Anexe alguns documentos que comprovem a existência e legalidade da startup.
-                Estes documentos ficarão públicos durante um leilão para investidores e outros empreendedores.
+                Estes documentos ficarão públicos durante a exibição do produto para investidores e outros empreendedores.
             </p>
         </div>
         <form method="POST" action="{{route('documentos.update', ['startup' => $startup])}}" enctype="multipart/form-data" class="form-envia-documentos">
@@ -100,7 +100,7 @@
                             @endif
                         @endforeach
                     @endif
-                        
+
                 </div>
             </div>
             <div class="row" style="margin-top: 10px; margin-bottom: 20px;">
