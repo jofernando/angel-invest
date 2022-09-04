@@ -29,7 +29,7 @@
                 <div class="col-md-12">
                     <img id="logo-angel-invest" src="{{asset('img/AngelInvest.png')}}" alt="Logo angel invest">
                     <div id="home-text">
-                        A AngelInvest é uma startup que visa aproximar investidores-anjo e startups que estão começando no mercado atualmente. Através da nossa plataforma online o dono da startup pode expor seu pitch, plano de negócio, métricas em uma espécie de exibição do produto. Dando a possibilidade do investidor visualizar sua empresa e caso tenha interesse dar um lance. O lance mais alto ao fim do período de exposição pode negociar com o dono da startup.
+                        A AngelInvest é uma startup que visa aproximar investidores-anjo e startups que estão começando no mercado atualmente. Através da nossa plataforma online o dono da startup pode expor seu pitch, plano de negócio, métricas em uma espécie de exibição do produto. Dando a possibilidade do investidor visualizar sua empresa e caso tenha interesse dar uma oferta. Ao fim do período de exposição do produto, os investidores que realizaram uma oferta serão contemplados.
                     </div>
                 </div>
             </div>

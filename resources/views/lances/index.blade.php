@@ -46,7 +46,7 @@
                                                 <span class="text-proposta" style="font-size: 14px"><img class="icon" src="{{asset('img/calendar.svg')}}" alt="Ícone de calendario"> Período de exibição do produto: <b>{{date('d/m', strtotime($leilao->data_inicio))}} a {{date('d/m', strtotime($leilao->data_fim))}}</b></span>
                                             </div>
                                             <div>
-                                                <span class="text-proposta" style="font-size: 14px"><img class="icon" src="{{asset('img/preco.svg')}}" alt="Ícone de lance mínimo"> Lance mínimo: <b>R$ {{number_format($leilao->valor_minimo, 2,",",".")}}</b></span>
+                                                <span class="text-proposta" style="font-size: 14px"><img class="icon" src="{{asset('img/preco.svg')}}" alt="Ícone de valor mínimo"> Valor mínimo <b>R$ {{number_format($leilao->valor_minimo, 2,",",".")}}</b></span>
                                             </div>
                                         @endif
                                     </div>
@@ -109,19 +109,19 @@
                                                 </div>
                                             @endif
                                         @empty
-                                            <h3 class="w-full text-center">Nenhum lance realizado</h3>
+                                            <h3 class="w-full text-center">Nenhuma oferta realizada</h3>
                                         @endforelse
                                         <div>
                                             @if(!$lance->leilao->lances()->take($lance->leilao->numero_ganhadores)->get()->pluck('investidor_id')->contains(auth()->user()->investidor->id))
                                                 <div class="bg-[#FFD6D6] text-center py-3 mx-4 mb-2 px-2 text-[#2F0E0E]">
-                                                    Faça um lance maior que R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
+                                                    Faça uma oferta maior que R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
                                                 </div>
                                             @endif
                                             @if($lance->leilao->proposta->leilao_atual())
                                                 @if($lance->leilao->id == $lance->leilao->proposta->leilao_atual()->id)
                                                     <div class="w-full grid justify-center">
                                                         <button class="btn btn-success btn-color-dafault mb-4" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            {{ __('Atualizar lance') }}
+                                                            {{ __('Atualizar oferta') }}
                                                         </button>
                                                     </div>
                                                 @endif

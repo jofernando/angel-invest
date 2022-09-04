@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
-                                        <label for="valor_mínimo" class="form-label ">Valor mínimo do lance <span style="color: red;">*</span></label>
+                                        <label for="valor_mínimo" class="form-label ">Valor mínimo da oferta <span style="color: red;">*</span></label>
                                         <input id="valor_mínimo" name="valor_mínimo" type="text" class="form-control dinheiro @error('valor_mínimo') is-invalid @enderror" placeholder="0,00" required value="{{old('valor_mínimo')}}">
 
                                         @error('valor_mínimo')
