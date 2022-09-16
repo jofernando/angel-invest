@@ -25,8 +25,8 @@ class PropostaRequest extends FormRequest
     {
         return [
             'título'            => 'required|max:255',
-            'vídeo_do_pitch'    => 'nullable|file|max:102400|mimes:mp4,mkv',
-            'thumbnail'         => 'nullable|file|max:5120|mimes:png,jpg',
+            'vídeo_do_pitch'    => 'required|file|max:102400|mimes:mp4,mkv',
+            'thumbnail'         => 'required|file|max:5120|mimes:png,jpg',
             'descrição'         => 'required|max:4000000000',
         ];
     }

@@ -25,6 +25,7 @@ class LeilaoRequest extends FormRequest
     public function rules()
     {
         return [
+            'taxa' => 'accepted',
             'produto_do_leilão' => 'required|integer',
             'valor_mínimo' => 'required|numeric|min:0.01|max:10000000000',
             'número_de_ganhadores' => 'required|integer|min:1',
@@ -39,10 +40,11 @@ class LeilaoRequest extends FormRequest
         return [
             'valor_mínimo.min' => 'O campo valor minímo deve ser pelo menos :min.',
             'valor_mínimo.max' => 'O campo valor minímo deve ser menor que 10.000.000.000,00.',
+            'taxa.accepted' => 'O campo de taxa do valor deve ser marcado.'
         ];
     }
 
-    public function prepareForValidation() 
+    public function prepareForValidation()
     {
         $this->whenFilled('valor_mínimo', function ($input) {
             $this->merge([

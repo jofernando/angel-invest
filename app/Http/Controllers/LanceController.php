@@ -42,16 +42,17 @@ class LanceController extends Controller
     public function store(Leilao $leilao, StoreLanceRequest $request)
     {
         $investidor = auth()->user()->investidor;
+
+        if($leilao->investidores_maximo()){
+            return redirect()->back()->with('error', 'O número máximo de investidores para o produto já foi atingido.');
+        }
         if (!$leilao->esta_no_periodo_de_lances()) {
             return redirect()->route('leiloes.lances.store', $leilao)->with('error', 'Lances não podem ser realizados fora do intervalo de exibição do produto');
         }
         if($leilao->investidor_fez_lance($investidor)) {
-            return redirect()->back()->with('message', 'Você já realizou uma oferta, para alterar o valor atualize-o.');
+            return redirect()->back()->with('error', 'Você já realizou uma oferta, para alterar o valor atualize-o.');
         }
 
-        if($investidor->carteira < 10) {
-            return redirect()->back()->with('message', 'Créditos insuficientes para realizar uma oferta.');
-        }
         $lance = new Lance();
         $lance->leilao()->associate($leilao);
 
@@ -59,7 +60,7 @@ class LanceController extends Controller
         $lance->valor = $request->validated()['valor'];
         $lance->save();
 
-        $investidor->carteira -= 10;
+        $investidor->carteira -= $lance->valor;
         $investidor->update();
         return redirect()->back()->with('message', 'Oferta realizada com sucesso');
     }
@@ -75,17 +76,17 @@ class LanceController extends Controller
     {
         $investidor = auth()->user()->investidor;
 
+        if($leilao->investidores_maximo()){
+            return redirect()->back()->with('error', 'O número máximo de investidores para o produto já foi atingido.');
+        }
+
         if (!$leilao->esta_no_periodo_de_lances()) {
             return redirect()->route('leiloes.lances.index', ['leilao' => $leilao, 'lance' => $lance])->with('error', 'Lances não podem ser realizados fora do intervalo de exibição do produto');
         }
 
-        if($investidor->carteira < 10) {
-            return redirect()->back()->with('message', 'Créditos insuficientes para realizar uma oferta.');
-        }
-
         $lance->valor = $request->validated()['valor'];
         $lance->save();
-        $investidor->carteira -= 10;
+        $investidor->carteira -= $lance->valor;
         $investidor->update();
         return redirect()->back()->with('message', 'Oferta realizada com sucesso');
     }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\LeilaoRequest;
 use App\Models\Lance;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 
 class LeilaoController extends Controller
@@ -50,6 +51,11 @@ class LeilaoController extends Controller
             'termo_de_porcentagem_do_produto' => 'required|file|max:5120|mimes:pdf',
         ]);
 
+        $valor = $this->calcularValorTaxa($request);
+        if($valor == null){
+            return redirect()->back()->with('error', 'O período de datas não pode ultrapassar 178 dias.');
+        }
+
         $produto = Proposta::find($request->input('produto_do_leilão'));
         $this->authorize('userOwnsTheProposta', $produto);
 
@@ -59,11 +65,45 @@ class LeilaoController extends Controller
 
         $leilao = new Leilao();
         $this->set_atributos_no_leilao($leilao, $request->all());
+        $leilao->taxa_cobrada = $valor;
         $leilao->save();
         $leilao->porcetagem_caminho = $this->salvar_termo_porcetagem($leilao, $request->file('termo_de_porcentagem_do_produto'));
         $leilao->update();
 
+        $investidor = auth()->user()->investidor;
+        $investidor->carteira -= $valor;
+        $investidor->update();
         return redirect(route('leilao.index'))->with('message', 'Exibição do produto salvo com sucesso!');
+    }
+
+
+    public function calcularValorTaxa(Request $request)
+    {
+        $datetime1 = new DateTime($request->data_de_início);
+        $datetime2 = new DateTime($request->data_de_fim);
+        $interval = $datetime1->diff($datetime2);
+
+        $days = $interval->days;
+
+        if($days > 178){
+            return null;
+        }
+        $valor = $days/30;
+        if($valor < 1){
+            $valor = 1;
+        }
+
+        return $valor*4.20;
+    }
+
+    public function jsonReturnTaxa(Request $request)
+    {
+        $valor = $this->calcularValorTaxa($request);
+        $json = [
+            'valor' => $valor,
+        ];
+
+        return response()->json($json);
     }
 
     /**

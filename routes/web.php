@@ -43,7 +43,7 @@ Route::middleware([
     })->name('chat');
 
     Route::get('/chat', ChatController::class)->name('chat.index');
-    
+
     Route::resource('startups', StartupController::class);
 
     Route::get('/get-component', [StartupController::class, 'startupGetComponent'])->name('startup.component.ajax');
@@ -52,6 +52,7 @@ Route::middleware([
     Route::resource('startups/{startup}/enderecos', EnderecoController::class);
     Route::resource('startups/{startup}/documentos', DocumentoController::class)->except('edit', 'update');
     Route::resource('leilao', LeilaoController::class)->except('show');
+    Route::get('/leilao/valor', [LeilaoController::class, 'jsonReturnTaxa'])->name('leilao.valor.ajax');
     Route::resource('leiloes.lances', LanceController::class)->parameters([
         'leiloes' => 'leilao'
     ])->except('index');
