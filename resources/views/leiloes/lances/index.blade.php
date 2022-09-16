@@ -47,7 +47,7 @@
                                 <div class="col-md-12">
                                     <div class="p-5 mb-4 bg-light rounded-3">
                                         <div class="container-fluid py-5">
-                                            <h3 class="w-full text-center">Nenhum lance realizado</h3>
+                                            <h3 class="w-full text-center">Nenhuma oferta realizada</h3>
                                         </div>
                                     </div>
                                 </div>

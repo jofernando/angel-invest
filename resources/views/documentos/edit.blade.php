@@ -12,7 +12,7 @@
                         <div class="row mb-4 mt-4" style="text-align: center;">
                             <div class="col-md-12">
                                 <a href="{{route('startups.show', $startup)}}" class="btn btn-success btn-padding border"><img src="{{asset('img/back.svg')}}" alt="Icone de voltar" style="padding-right: 5px; height: 22px;"> Voltar</a>
-                            </div>  
+                            </div>
                         </div>
                         <div class="row">
                             <div id ="left-div-create" class="col-md-12">
@@ -41,8 +41,8 @@
                                                 <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
                                                     <div class="col-md-6">
                                                         <span class="span-btn-add" id="btn-adicionar-escolhar" onclick="addDoc()">
-                                                          <a class="btn btn-success btn-default btn-padding border"> 
-                                                            <img src="{{asset('img/add-document.svg')}}" alt=""> 
+                                                          <a class="btn btn-success btn-default btn-padding border">
+                                                            <img src="{{asset('img/add-document.svg')}}" alt="">
                                                             Novo documento
                                                           </a>
                                                         </span>
@@ -54,7 +54,7 @@
                                                 <div class="row">
                                                     <p>
                                                         Anexe alguns documentos que comprovem a existência e legalidade da startup.
-                                                        Estes documentos ficarão públicos durante um leilão para investidores e outros empreendedores.
+                                                        Estes documentos ficarão públicos durante a exibição do produto para investidores e outros empreendedores.
                                                     </p>
                                                 </div>
                                                 <div class="row">
@@ -134,7 +134,7 @@
                                                             @endif
                                                         @endforeach
                                                     @endif
-                                                        
+
                                                 </div>
                                             </div>
                                             <div class="row" style="margin-top: 10px; margin-bottom: 20px;">

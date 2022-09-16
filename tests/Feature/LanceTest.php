@@ -58,7 +58,7 @@ class LanceTest extends TestCase
     {
         $response = $this->get(route('propostas.show', ['startup' => $this->startup, 'proposta' => $this->proposta]));
         $response->assertStatus(200);
-        $response->assertSee('Nenhum lance realizado');
+        $response->assertSee('Nenhuma oferta realizada');
 
     }
 
@@ -71,7 +71,7 @@ class LanceTest extends TestCase
             route('leiloes.lances.store', ['leilao' => $this->leilao]),
             ['valor' => number_format(floatval($this->leilao->valor_minimo) + 1, 2,",",".")]
         );
-        $this->followRedirects($response)->assertSee('Lance realizado com sucesso');
+        $this->followRedirects($response)->assertSee('Oferta realizada com sucesso');
         $this->assertDatabaseHas('lances', [
             'valor' => floatval($this->leilao->valor_minimo) + 1,
             'leilao_id' => $this->leilao->id,

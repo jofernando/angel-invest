@@ -19,8 +19,8 @@ class LanceTest extends DuskTestCase
             $leilao = $this->criar_leilao($user);
             $browser->loginAs($user)
                 ->visit(route('propostas.show', ['proposta' => $leilao->proposta, 'startup' => $leilao->proposta->startup]))
-                ->waitForText('Nenhum lance realizado',15)
-                ->assertSee('Nenhum lance realizado');
+                ->waitForText('Nenhuma oferta realizada',15)
+                ->assertSee('Nenhuma oferta realizada');
             $this->resetar_session();
         });
     }
@@ -33,12 +33,12 @@ class LanceTest extends DuskTestCase
             Investidor::find($user->investidor->id)->update(['carteira' => $leilao->valor_minimo + 1000]);
             $browser->loginAs($user)
                 ->visit(route('propostas.show', ['proposta' => $leilao->proposta, 'startup' => $leilao->proposta->startup]))
-                ->press('Fazer lance')
-                ->waitForText('Valor do lance')
+                ->press('Fazer oferta')
+                ->waitForText('Valor da oferta')
                 ->typeSlowly('valor', number_format($leilao->valor_minimo, 2,",","."))
-                ->press('Fazer lance')
-                ->waitForText('Lance realizado com sucesso',15)
-                ->assertSee('Lance realizado com sucesso');
+                ->press('Fazer oferta')
+                ->waitForText('Oferta realizada com sucesso',15)
+                ->assertSee('Oferta realizada com sucesso');
             $this->resetar_session();
         });
     }
@@ -51,12 +51,12 @@ class LanceTest extends DuskTestCase
             Investidor::find($user->investidor->id)->update(['carteira' => 0]);
             $browser->loginAs($user)
                 ->visit(route('propostas.show', ['proposta' => $leilao->proposta, 'startup' => $leilao->proposta->startup]))
-                ->press('Fazer lance')
-                ->waitForText('Valor do lance')
+                ->press('Fazer oferta')
+                ->waitForText('Valor da oferta')
                 ->typeSlowly('valor', number_format($leilao->valor_minimo, 2,",","."))
-                ->press('Fazer lance')
-                ->waitForText('Você não possui AnjoCoins suficientes para realizar o lance',15)
-                ->assertSee('Você não possui AnjoCoins suficientes para realizar o lance');
+                ->press('Fazer oferta')
+                ->waitForText('Você não possui AnjoCoins suficientes para realizar a oferta',15)
+                ->assertSee('Você não possui AnjoCoins suficientes para realizar a oferta');
             $this->resetar_session();
         });
     }

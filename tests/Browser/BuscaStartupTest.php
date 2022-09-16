@@ -46,7 +46,7 @@ class BuscaStartupTest extends DuskTestCase
             $browser->visitRoute('produto.search')
                     ->type('nome', "Apresentando Angel Invest")
                     ->click('#btnbuscasubmit')
-                    ->assertSee("Não foram encontrados produtos com leilão para essa busca :(");
+                    ->assertSee("Não foram encontrados produtos em exibição para essa busca");
         });
     }
 }

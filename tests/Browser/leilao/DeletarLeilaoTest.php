@@ -14,12 +14,12 @@ class DeletarLeilaoTest extends DuskTestCase
             $leilao = $this->criar_leilao();
             $this->login($browser, $leilao->proposta->startup->user);
             $browser->visitRoute('leilao.index')
-                    ->waitForText('Criar um leilão')
+                    ->waitForText('Criar uma exibição do produto')
                     ->click('#btnmodaldelete'.$leilao->id)
-                    ->waitForText('Tem certeza que deseja deletar o leilão #'.$leilao->id .' do produto '.$leilao->proposta->titulo)
+                    ->waitForText('Tem certeza que deseja deletar a exibição #'.$leilao->id .' do produto '.$leilao->proposta->titulo)
                     ->click('#btnmodaldeleteform'.$leilao->id)
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão deletado com sucesso!');
+                    ->waitForText('Criar uma exibição do produto')
+                    ->assertSee('Exibição do produto deletado com sucesso!');
             $this->resetar_session();
         });
     }

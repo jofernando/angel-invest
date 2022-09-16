@@ -60,7 +60,7 @@ class LeilaoController extends Controller
         $this->authorize('userOwnsTheProposta', $produto);
 
         if ($this->viola_intervalo_tempo($produto, $request->input('data_de_início'), $request->input('data_de_fim'))) {
-            return redirect(route('leilao.create'))->withErrors(['leilao_existente' => 'Já existe um leilão para esse produto que engloba o período escolhido.'])->withInput($request->all());
+            return redirect(route('leilao.create'))->withErrors(['leilao_existente' => 'Já existe uma exibição para esse produto que engloba o período escolhido.'])->withInput($request->all());
         }
 
         $leilao = new Leilao();
@@ -73,7 +73,7 @@ class LeilaoController extends Controller
         $investidor = auth()->user()->investidor;
         $investidor->carteira -= $valor;
         $investidor->update();
-        return redirect(route('leilao.index'))->with('message', 'Leilão salvo com sucesso!');
+        return redirect(route('leilao.index'))->with('message', 'Exibição do produto salvo com sucesso!');
     }
 
 
@@ -150,14 +150,14 @@ class LeilaoController extends Controller
         $this->authorize('update', $leilao);
 
         if ($this->viola_intervalo_tempo($produto, $request->input('data_de_início'), $request->input('data_de_fim'), $leilao)) {
-            return redirect(route('leilao.edit', $leilao))->withErrors(['leilao_existente' => 'Já existe um leilão para esse produto que engloba o período escolhido.'])->withInput($request->all());
+            return redirect(route('leilao.edit', $leilao))->withErrors(['leilao_existente' => 'Já existe uma exibição para esse produto que engloba o período escolhido.'])->withInput($request->all());
         }
 
         $this->set_atributos_no_leilao($leilao, $request->all());
         $leilao->porcetagem_caminho = $this->salvar_termo_porcetagem($leilao, $request->file('termo_de_porcentagem_do_produto'));
         $leilao->update();
 
-        return redirect(route('leilao.index'))->with('message', 'Leilão atualizado com sucesso!');
+        return redirect(route('leilao.index'))->with('message', 'Exibição do produto atualizado com sucesso!');
     }
 
     /**
@@ -173,7 +173,7 @@ class LeilaoController extends Controller
         $this->deletar_arquivo_termo($leilao);
         $leilao->delete();
 
-        return redirect(route('leilao.index'))->with('message', 'Leilão deletado com sucesso!');
+        return redirect(route('leilao.index'))->with('message', 'Exibição do produto deletado com sucesso!');
     }
 
     /**

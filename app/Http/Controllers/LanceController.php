@@ -47,10 +47,10 @@ class LanceController extends Controller
             return redirect()->back()->with('error', 'O número máximo de investidores para o produto já foi atingido.');
         }
         if (!$leilao->esta_no_periodo_de_lances()) {
-            return redirect()->back()->with('error', 'Lances não podem ser realizados fora do intervalo do leilão');
+            return redirect()->route('leiloes.lances.store', $leilao)->with('error', 'Lances não podem ser realizados fora do intervalo de exibição do produto');
         }
         if($leilao->investidor_fez_lance($investidor)) {
-            return redirect()->back()->with('error', 'Você já realizou um lance, para alterar o valor atualize-o.');
+            return redirect()->back()->with('error', 'Você já realizou uma oferta, para alterar o valor atualize-o.');
         }
 
         $lance = new Lance();
@@ -62,7 +62,7 @@ class LanceController extends Controller
 
         $investidor->carteira -= $lance->valor;
         $investidor->update();
-        return redirect()->back()->with('message', 'Lance realizado com sucesso');
+        return redirect()->back()->with('message', 'Oferta realizada com sucesso');
     }
 
     /**
@@ -81,14 +81,14 @@ class LanceController extends Controller
         }
 
         if (!$leilao->esta_no_periodo_de_lances()) {
-            return redirect()->route('leiloes.lances.index', ['leilao' => $leilao, 'lance' => $lance])->with('error', 'Lances não podem ser realizados fora do intervalo do leilão');
+            return redirect()->route('leiloes.lances.index', ['leilao' => $leilao, 'lance' => $lance])->with('error', 'Lances não podem ser realizados fora do intervalo de exibição do produto');
         }
 
         $lance->valor = $request->validated()['valor'];
         $lance->save();
         $investidor->carteira -= $lance->valor;
         $investidor->update();
-        return redirect()->back()->with('message', 'Lance realizado com sucesso');
+        return redirect()->back()->with('message', 'Oferta realizada com sucesso');
     }
 
     /**

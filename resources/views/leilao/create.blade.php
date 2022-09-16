@@ -10,7 +10,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <h4 class="card-title" style="font-size: 22px;">Adicionando novo leilão</h5>
+                            <h4 class="card-title" style="font-size: 22px;">Adicionando nova exibição do produto</h5>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -28,7 +28,7 @@
                             <div class="container" style="margin-top: 15px; margin-bottom: 15px;">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Criando um novo leilão</h2>
+                                        <h2>Criando uma nova exibição do produto</h2>
                                     </div>
                                 </div>
                                 <div class="row" style="text-align: right;">
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
-                                        <label for="produto_do_leilão" class="form-label ">Produto do leilão <span style="color: red;">*</span></label>
+                                        <label for="produto_do_leilão" class="form-label ">Produto <span style="color: red;">*</span></label>
                                         <select name="produto_do_leilão" id="produto_do_leilão" class="form-control @error('produto_do_leilão') is-invalid @enderror" >
                                             <option value="" selected disabled>-- Selecione um produto --</option>
                                             @foreach ($produtos as $produto)
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
-                                        <label for="valor_mínimo" class="form-label ">Valor mínimo do lance <span style="color: red;">*</span></label>
+                                        <label for="valor_mínimo" class="form-label ">Valor mínimo da oferta <span style="color: red;">*</span></label>
                                         <input id="valor_mínimo" name="valor_mínimo" type="text" class="form-control dinheiro @error('valor_mínimo') is-invalid @enderror" placeholder="0,00" required value="{{old('valor_mínimo')}}">
 
                                         @error('valor_mínimo')
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <label for="data_de_início" class="form-label ">Data de início do leilão <span style="color: red;">*</span></label>
+                                        <label for="data_de_início" class="form-label ">Data de início da exibição do produto <span style="color: red;">*</span></label>
                                         <input id="data_de_início" name="data_de_início" type="date" class="form-control @error('data_de_início') is-invalid @enderror" required value="{{old('data_de_início')}}" onchange="calcularValorTaxa()">
 
                                         @error('data_de_início')
@@ -94,7 +94,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="data_de_fim" class="form-label ">Data de fim do leilão <span style="color: red;">*</span></label>
+                                        <label for="data_de_fim" class="form-label ">Data de fim da exibição do produto <span style="color: red;">*</span></label>
                                         <input id="data_de_fim" name="data_de_fim" type="date" class="form-control @error('data_de_fim') is-invalid @enderror" required value="{{old('data_de_fim')}}" onchange="calcularValorTaxa()">
 
                                         @error('data_de_fim')

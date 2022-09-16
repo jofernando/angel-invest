@@ -57,7 +57,7 @@
                                     <div class="row mb-4">
                                         <div class="col-md-12">
                                             @if(is_null($proposta->leilao_atual()))
-                                                <a href="{{route('leilao.create')}}?produto={{$proposta->id}}" class="btn btn-success btn-default btn-padding border"><img src="{{asset('img/dolar-bag.svg')}}" alt="Ícone de criar" style="width: 40px;"><span style="font-weight: bolder;">Criar leilão</span></a>
+                                                <a href="{{route('leilao.create')}}?produto={{$proposta->id}}" class="btn btn-success btn-default btn-padding border"><img src="{{asset('img/dolar-bag.svg')}}" alt="Ícone de criar" style="width: 40px;"><span style="font-weight: bolder;">Criar exibição do produto</span></a>
                                             @endif
                                         </div>
                                     </div>
@@ -180,15 +180,15 @@
                                     @endif
                                 @empty
                                     <div class="mb-4 rounded-3">
-                                        <h4 class="display-6 fw-bold">Nenhum lance realizado</h4>
+                                        <h4 class="display-6 fw-bold">Nenhuma oferta realizada</h4>
                                         @auth
                                             @if($proposta->leilao_atual())
                                                 @if($proposta->leilao_atual()->esta_no_periodo_de_lances() && auth()->user()->tipo != App\Models\User::PROFILE_ENUM['entrepreneur'])
-                                                    <p class="col-md-12 fs-4">Faça um lance clicando no botão abaixo</p>
+                                                    <p class="col-md-12 fs-4">Faça uma oferta clicando no botão abaixo</p>
                                                 @endif
                                             @endif
                                         @else
-                                            <p class="col-md-12 fs-6"> <a href="{{route('register')}}">Cadastre-se</a> para fazer um lance</p>
+                                            <p class="col-md-12 fs-6"> <a href="{{route('register')}}">Cadastre-se</a> para fazer uma oferta</p>
                                         @endauth
                                     </div>
                                 @endforelse
@@ -200,7 +200,7 @@
                                                     @include('leiloes.lances.create', ['leilao' => $proposta->leilao_atual()])
                                                     <button class="btn btn-success btn-yellow btn-padding border" style="width: 100%" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                         <img src="{{asset('img/dolar-white.svg')}}" width="35px" alt="">
-                                                        <span style="text-shadow: 2px 1px 4px rgb(49, 49, 21); font-size: 18px;">Fazer lance</span>
+                                                        <span style="text-shadow: 2px 1px 4px rgb(49, 49, 21); font-size: 18px;">Fazer oferta</span>
                                                     </button>
                                                 @endif
                                             </div>
@@ -216,10 +216,10 @@
                             <div class="row mt-2" style="border-top:solid 2px #e0e0e0;">
                                 <div class="mb-4 mt-1">
                                     <div>
-                                        <span class="text-proposta" style="font-size: 14px;"><img class="icon" src="{{asset('img/calendar.svg')}}" alt="Ícone de calendario"> Período do leilão: <b>{{date('d/m', strtotime($leilao->data_inicio))}}</b> a <b>{{date('d/m', strtotime($leilao->data_fim))}}</b></span>
+                                        <span class="text-proposta" style="font-size: 14px;"><img class="icon" src="{{asset('img/calendar.svg')}}" alt="Ícone de calendario"> Período da exibição do produto: <b>{{date('d/m', strtotime($leilao->data_inicio))}}</b> a <b>{{date('d/m', strtotime($leilao->data_fim))}}</b></span>
                                     </div>
                                     <div>
-                                        <span class="text-proposta" style="font-size: 14px;"><img class="icon" src="{{asset('img/preco.svg')}}" alt="Ícone de lance mínimo"> Lance mínimo: <b>R$ {{number_format($leilao->valor_minimo, 2,",",".")}}</b></span>
+                                        <span class="text-proposta" style="font-size: 14px;"><img class="icon" src="{{asset('img/preco.svg')}}" alt="Ícone de valor mínimo"> Valor mínimo <b>R$ {{number_format($leilao->valor_minimo, 2,",",".")}}</b></span>
                                     </div>
                                 </div>
                             </div>

@@ -37,8 +37,8 @@ class UpdateLanceRequest extends FormRequest
         $min = number_format($lance->valor, 2,",",".");
         $max = number_format(auth()->user()->investidor->carteira, 2,",",".");
         return [
-            'valor.min' => "O valor do lance não pode estar abaixo do lance anterior que é {$min}",
-            'valor.max' => "Você não possui AnjoCoins suficientes para realizar o lance",
+            'valor.min' => "O valor da oferta não pode estar abaixo da oferta anterior que é {$min}",
+            'valor.max' => "Você não possui AnjoCoins suficientes para realizar a oferta",
         ];
     }
 

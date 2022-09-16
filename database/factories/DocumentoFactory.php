@@ -16,7 +16,8 @@ class DocumentoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nome' => $this->faker->word,
+            'caminho' => 'documentos/startups/'.$this->faker->file(storage_path('app/test/pdfs'), storage_path('app/public/documentos/startups'), false),
         ];
     }
     /**

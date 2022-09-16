@@ -14,7 +14,7 @@ class CreateLeilaoTest extends DuskTestCase
             $proposta = $this->criar_proposta();
             $this->login($browser, $proposta->startup->user);
             $browser->visitRoute('leilao.create')
-                    ->assertSee('Adicionando novo leilão');
+                    ->assertSee('Adicionando nova exibição do produto');
             $this->resetar_session();
         });
     }
@@ -32,8 +32,8 @@ class CreateLeilaoTest extends DuskTestCase
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(5))) . "'");
             $browser->attach('termo_de_porcentagem_do_produto', __DIR__ . '/file/pdf-test.pdf')
                     ->click('#salvar')
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão salvo com sucesso!');
+                    ->waitForText('Criar um exibição do produto')
+                    ->assertSee('Exibição do produto salvo com sucesso!');
             $this->resetar_session();
         });
     }
@@ -50,7 +50,7 @@ class CreateLeilaoTest extends DuskTestCase
                     ->script("document.querySelector('input[name=data_de_início]').value = '". date('Y-m-d', strtotime(now()->subDays(5))) . "'");
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(5))) . "'");
             $browser->click('#salvar')
-                    ->waitForText('Adicionando novo leilão')
+                    ->waitForText('Adicionando nova exibição do produto')
                     ->assertSee('O campo termo de porcentagem do produto é obrigatório.');
             $this->resetar_session();
         });
@@ -61,7 +61,7 @@ class CreateLeilaoTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $proposta = $this->criar_proposta();
             $this->login($browser, $proposta->startup->user);
-            
+
             $browser->visitRoute('leilao.create')
                     ->select('produto_do_leilão', $proposta->id)
                     ->type('valor_mínimo', "2000")
@@ -70,8 +70,8 @@ class CreateLeilaoTest extends DuskTestCase
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(5))) . "'");
             $browser->attach('termo_de_porcentagem_do_produto', __DIR__ . '/file/pdf-test.pdf')
                     ->click('#salvar')
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão salvo com sucesso!');
+                    ->waitForText('Criar uma exibição do produto')
+                    ->assertSee('Exibição do produto salvo com sucesso!');
 
             $browser->visitRoute('leilao.create')
                     ->select('produto_do_leilão', $proposta->id)
@@ -81,9 +81,9 @@ class CreateLeilaoTest extends DuskTestCase
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(6))) . "'");
             $browser->attach('termo_de_porcentagem_do_produto', __DIR__ . '/file/pdf-test.pdf')
                     ->click('#salvar')
-                    ->waitForText('Adicionando novo leilão')
-                    ->assertSee('Já existe um leilão para esse produto que engloba o período escolhido.');
-        
+                    ->waitForText('Adicionando nova exibição do produto')
+                    ->assertSee('Já existe um exibição para esse produto que engloba o período escolhido.');
+
             $this->resetar_session();
         });
     }
@@ -93,7 +93,7 @@ class CreateLeilaoTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $proposta = $this->criar_proposta();
             $this->login($browser, $proposta->startup->user);
-            
+
             $browser->visitRoute('leilao.create')
                     ->select('produto_do_leilão', $proposta->id)
                     ->type('valor_mínimo', "2000")
@@ -102,8 +102,8 @@ class CreateLeilaoTest extends DuskTestCase
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(5))) . "'");
             $browser->attach('termo_de_porcentagem_do_produto', __DIR__ . '/file/pdf-test.pdf')
                     ->click('#salvar')
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão salvo com sucesso!');
+                    ->waitForText('Criar uma exibição do produto')
+                    ->assertSee('Exibição do produto salvo com sucesso!');
 
             $browser->visitRoute('leilao.create')
                     ->select('produto_do_leilão', $proposta->id)
@@ -113,9 +113,9 @@ class CreateLeilaoTest extends DuskTestCase
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(15))) . "'");
             $browser->attach('termo_de_porcentagem_do_produto', __DIR__ . '/file/pdf-test.pdf')
                     ->click('#salvar')
-                    ->waitForText('Criar um leilão')
-                    ->assertSee('Leilão salvo com sucesso!');
-        
+                    ->waitForText('Criar uma exibição do produto')
+                    ->assertSee('Exibição do produto salvo com sucesso!');
+
             $this->resetar_session();
         });
     }
@@ -132,7 +132,7 @@ class CreateLeilaoTest extends DuskTestCase
                     ->script("document.querySelector('input[name=data_de_início]').value = '". date('Y-m-d', strtotime(now()->subDays(5))) . "'");
             $browser->script("document.querySelector('input[name=data_de_fim]').value = '". date('Y-m-d', strtotime(now()->addDays(5))) . "'");
             $browser->click('#salvar')
-                    ->waitForText('Adicionando novo leilão')
+                    ->waitForText('Adicionando nova exibição do produto')
                     ->assertSee('O campo valor minímo deve ser pelo menos 0.01.')
                     ->assertSee('O campo número de ganhadores deve ser pelo menos 1.');
             $this->resetar_session();

@@ -37,8 +37,8 @@ class StoreLanceRequest extends FormRequest
         $min = number_format($leilao->valor_minimo, 2,",",".");
         $max = number_format(auth()->user()->investidor->carteira, 2,",",".");
         return [
-            'valor.min' => "O valor do lance não pode estar abaixo do valor mínimo que é {$min}",
-            'valor.max' => "Você não possui AnjoCoins suficientes para realizar o lance",
+            'valor.min' => "O valor da oferta não pode estar abaixo do valor mínimo que é {$min}",
+            'valor.max' => "Você não possui AnjoCoins suficientes para realizar a oferta",
         ];
     }
 
