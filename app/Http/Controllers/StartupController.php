@@ -73,7 +73,7 @@ class StartupController extends Controller
         switch($request->etapa_nome){
             case "Informações básicas":
                 $areas = Area::pluck('nome', 'id');
-                
+
                 if(is_null($startup)){
                     return View::make("components.startup.create", compact('areas'))
                     ->render();
@@ -109,7 +109,7 @@ class StartupController extends Controller
                     ->render();
                 }
         }
-        
+
     }
 
     /**
@@ -186,7 +186,7 @@ class StartupController extends Controller
         if(is_null($startup->endereco) || is_null($startup->documentos->first())){
             return redirect()->back()->with(['message' => 'Informações básicas atualizadas com sucesso!']);
         }
-        
+
         return redirect(route('startups.show', $startup))->with(['message' => 'Informações básicas atualizadas com sucesso!']);
     }
 

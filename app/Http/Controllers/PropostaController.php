@@ -20,7 +20,7 @@ class PropostaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($startup)
-    {   
+    {
         $startup = Startup::find($startup);
         $this->authorize('viewIndex', $startup);
         $propostas = $startup->propostas()->orderBy('titulo')->get();
@@ -51,11 +51,6 @@ class PropostaController extends Controller
     {
         $startup = Startup::find($startup);
         $this->authorize('createProposta', $startup);
-
-        $request->validate([
-            'vídeo_do_pitch'    => 'required|file|max:102400|mimes:mp4,mkv',
-            'thumbnail'         => 'required|file|max:5120|mimes:png,jpg',
-        ]);
 
         $proposta = new Proposta();
         $this->set_attributes($proposta, $request->all());
@@ -91,8 +86,8 @@ class PropostaController extends Controller
                 }
             }
         }
-        
-            
+
+
         if ($startup == null || $proposta == null) {
             abort(404);
         }
@@ -102,7 +97,7 @@ class PropostaController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @param  int  $proposta
      * @param  int  $startup
      * @return \Illuminate\Http\Response
@@ -137,7 +132,7 @@ class PropostaController extends Controller
         $this->set_attributes($proposta, $request->all());
         $proposta->video_caminho = $this->salvar_arquivo($proposta, $request->file('vídeo_do_pitch'), $proposta->video_caminho, '/video/');
         $proposta->thumbnail_caminho = $this->salvar_arquivo($proposta, $request->file('thumbnail'), $proposta->thumbnail_caminho, '/thumb/');
-        
+
         $proposta->update();
 
         return redirect(route('propostas.index', $startup))->with(['message' => 'Produto atualizado com sucesso!']);
@@ -169,13 +164,13 @@ class PropostaController extends Controller
 
     /**
      * Seta os atribudos da proposta
-     * 
+     *
      * @param Proposta $proposta : objeto de proposta
-     * @param array $array_inputs : array com os inputs 
+     * @param array $array_inputs : array com os inputs
      * @return void
      */
 
-    private function set_attributes(Proposta $proposta, $array_inputs) 
+    private function set_attributes(Proposta $proposta, $array_inputs)
     {
         $proposta->titulo = $array_inputs['título'];
         $proposta->descricao = $array_inputs['descrição'];
@@ -183,7 +178,7 @@ class PropostaController extends Controller
 
     /**
      * Salva um arquivo da proposta
-     * 
+     *
      * @param Proposta $proposta : objeto de proposta
      * @param file $file : arquivo que será salvo
      * @param string $diretorio : diretório atual para checar se existe algum arquivo ligado a proposta
@@ -204,17 +199,17 @@ class PropostaController extends Controller
             return $novo_diretorio;
         } else {
             return $diretorio;
-        }        
+        }
     }
 
     /**
      * Deleta um arquivo no diretorio especificado
-     * 
+     *
      * @param string $diretorio : diretório do arquivo que será deletado
      * @return void
      */
 
-    private function deletar_arquivo($diretorio) 
+    private function deletar_arquivo($diretorio)
     {
         if ($diretorio != null) {
             if (Storage::disk()->exists('public/' . $diretorio)) {
@@ -229,7 +224,7 @@ class PropostaController extends Controller
      * @param Proposta $proposta
      * @return void
      */
-    private function deletar_leiloes(Proposta $proposta) 
+    private function deletar_leiloes(Proposta $proposta)
     {
         foreach ($proposta->leiloes as $leilao) {
             $leilao->delete();
@@ -253,7 +248,7 @@ class PropostaController extends Controller
         } else {
             if($request->all() == null){
                 $leiloes_atuais = Leilao::where([['data_inicio', '<=', $hoje], ['data_fim', '>=', $hoje]])->take(6)->get();
-                $leiloes_encerrados = Leilao::where('data_fim', '<', $hoje)->take(6)->get(); 
+                $leiloes_encerrados = Leilao::where('data_fim', '<', $hoje)->take(6)->get();
                 $leiloes = collect()->push($leiloes_atuais)->push($leiloes_encerrados);
             }else{
                 $query = DB::table('leilaos')->join('propostas', 'leilaos.proposta_id', '=', 'propostas.id')
@@ -275,17 +270,17 @@ class PropostaController extends Controller
      * @param Request $request
      * @return Leilao $leiloes : Collect de leiloes consultados
      */
-    private function aplicar_filtros(Request $request) 
+    private function aplicar_filtros(Request $request)
     {
-        $leiloes = collect(); 
+        $leiloes = collect();
         $leilaos_atuais = collect();
-        $leilaos_encerrados = collect(); 
+        $leilaos_encerrados = collect();
 
         $hoje = now();
         $query = DB::table('leilaos')->join('propostas', 'leilaos.proposta_id', '=', 'propostas.id')
                                       ->join('startups', 'startups.id', '=', 'propostas.startup_id')
                                       ->select('leilaos.id');
-        
+
         if ($request->nome != null) {
             $query->where('startups.nome', 'ilike', '%' . $request->nome . '%');
             $query->orWhere('propostas.titulo', 'ilike', '%' . $request->nome . '%');
