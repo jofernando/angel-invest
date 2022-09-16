@@ -65,6 +65,7 @@ class LeilaoController extends Controller
 
         $leilao = new Leilao();
         $this->set_atributos_no_leilao($leilao, $request->all());
+        $leilao->taxa_cobrada = $valor;
         $leilao->save();
         $leilao->porcetagem_caminho = $this->salvar_termo_porcetagem($leilao, $request->file('termo_de_porcentagem_do_produto'));
         $leilao->update();

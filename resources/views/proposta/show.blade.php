@@ -62,6 +62,7 @@
                                         </div>
                                     </div>
                                 @endcan
+                                @if($leilao)
                                 <div class="row mb-4">
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
@@ -88,6 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 <div class="row mb-4">
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
