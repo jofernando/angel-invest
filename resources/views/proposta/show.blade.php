@@ -28,7 +28,7 @@
                         </video>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
@@ -65,7 +65,33 @@
                                 <div class="row mb-4">
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
-                                            Documentos da startup
+                                            @if ($leilao->numero_ganhadores == 1)
+                                            {{$leilao->numero_ganhadores}} investidor será contemplado com o seguinte documento
+                                            @else
+                                            {{$leilao->numero_ganhadores}} investidores serão contemplados com o seguinte documento
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
+                                            Termo de reponsabilidade e compromisso com o investidor contemplado:
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 ml-2">
+                                            <a href="{{route('leilao.termo', $leilao)}}" target="_blank">
+                                                <div class="documentos">
+                                                    <span style="font-weight: bold; color: rgb(0, 0, 0)">Termo</span>
+                                                    <img  src="{{asset('img/pdf-icon.svg')}}" alt="Ícone de documento" title="termo">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
+                                            Documentos comprabatórios que certificam a existência e regularidade da startup:
                                         </div>
                                     </div>
                                     <div class="row">
@@ -82,9 +108,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="row mb-3">
+                                    <div class="row">
                                         <div class="col-md-12">
-                                            Contato
+                                            Contato:
                                         </div>
                                     </div>
                                     <div class="row">
@@ -105,7 +131,7 @@
                                                         {{ __('Chat privado') }}
                                                     </a>
                                                 </div>
-                                            </div>                                        
+                                            </div>
                                         @endif
                                     @endauth
                                 </div>
@@ -120,19 +146,10 @@
                         <div class="card-body bg-light">
                             <div class="row">
                                 @if($leilao->lances->count() > 0)
-                                    <p class="col-md-12 display-4 fw-bold" style="text-align: center; font-size: 20px;">@if($proposta->leilao_atual())Investidores contemplados no momento @else Investidores contemplados @endif</p>
+                                    <p class="col-md-12 display-4 fw-bold" style="text-align: center; font-size: 20px;">@if($proposta->leilao_atual() && $proposta->leilao_atual()->esta_no_periodo_de_lances() && ! $proposta->leilao_atual()->investidores_maximo())Investidores contemplados no momento @else Investidores contemplados @endif</p>
                                 @endif
                                 @forelse ($leilao->lances as $index => $lance)
-                                    @if(auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id)
-                                        @include('leiloes.lances.edit', ['leilao' => $proposta->leilao_atual(), 'lance' => $lance])
-                                    @endif
                                     @if($index < $leilao->numero_ganhadores)
-<<<<<<< HEAD
-                                        @if (auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id && $proposta->leilao_atual() != null && $lance->leilao->id == $proposta->leilao_atual()->id)
-                                            @include('leiloes.lances.edit', ['leilao' => $lance->leilao, 'lance' => $lance])
-                                        @endif
-=======
->>>>>>> kelwin
                                         <div @class([
                                                 'w-1/2' => $index == 1 || $index == 2,
                                                 'w-full' => $index != 1 && $index != 2,
@@ -175,15 +192,9 @@
                                 @endforelse
                                 @auth
                                     @if($proposta->leilao_atual())
-                                        @if($proposta->leilao_atual()->esta_no_periodo_de_lances() && auth()->user()->tipo != App\Models\User::PROFILE_ENUM['entrepreneur'])
+                                        @if($proposta->leilao_atual()->esta_no_periodo_de_lances() && ! $proposta->leilao_atual()->investidores_maximo() && auth()->user()->tipo != App\Models\User::PROFILE_ENUM['entrepreneur'])
                                             <div class="justify-center mb-2">
-                                                @if ($proposta->leilao_atual()->investidor_fez_lance(auth()->user()->investidor))
-                                                    <button class="btn btn-success btn-yellow btn-padding border" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 100%">
-                                                        <img src="{{asset('img/dolar-white.svg')}}" width="35px" alt="">
-                                                        <span style="text-shadow: 2px 1px 4px rgb(49, 49, 21); font-size: 18px;">Atualizar lance</span>
-                                                    </button>
-
-                                                @else
+                                                @if (! $proposta->leilao_atual()->investidor_fez_lance(auth()->user()->investidor))
                                                     @include('leiloes.lances.create', ['leilao' => $proposta->leilao_atual()])
                                                     <button class="btn btn-success btn-yellow btn-padding border" style="width: 100%" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                         <img src="{{asset('img/dolar-white.svg')}}" width="35px" alt="">

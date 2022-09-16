@@ -111,10 +111,10 @@
                                         @empty
                                             <h3 class="w-full text-center">Nenhum lance realizado</h3>
                                         @endforelse
-                                        <div>
+                                        {{--<div>
                                             @if(!$lance->leilao->lances()->take($lance->leilao->numero_ganhadores)->get()->pluck('investidor_id')->contains(auth()->user()->investidor->id))
                                                 <div class="bg-[#FFD6D6] text-center py-3 mx-4 mb-2 px-2 text-[#2F0E0E]">
-                                                    Faça um lance maior que R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
+                                                    Faça um lance de R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
                                                 </div>
                                             @endif
                                             @if($lance->leilao->proposta->leilao_atual())
@@ -126,7 +126,7 @@
                                                     </div>
                                                 @endif
                                             @endif
-                                        </div>
+                                        </div>--}}
                                     </div>
                                 </div>
                             </div>

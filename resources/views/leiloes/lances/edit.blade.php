@@ -28,7 +28,7 @@
                                 </div>
                                     @if(!$leilao->lances()->take($leilao->numero_ganhadores)->get()->pluck('investidor_id')->contains(auth()->user()->investidor->id))
                                         <div class="bg-[#FFD6D6] text-center py-3 text-[#2F0E0E]">
-                                            Faça um lance maior que R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
+                                            Faça um lance de R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
                                         </div>
                                     @endif
                                 <div class="flex mt-3">

@@ -58,6 +58,11 @@ class Leilao extends Model
         return $now >= $startdate && $now <= $enddate;
     }
 
+    public function investidores_maximo()
+    {
+        return $this->lances()->count() == $this->numero_ganhadores;
+    }
+
     public function investidor_fez_lance(Investidor $investidor)
     {
         return $this->lances()->where('investidor_id', $investidor->id)->get()->isNotEmpty();
