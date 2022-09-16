@@ -28,8 +28,9 @@ class StartupFactory extends Factory
     public function withLogo()
     {
         return $this->state(function (array $attributes) {
+            $filename = $this->faker->file(storage_path('app/test/imgs'), storage_path('app/public/startups/logos'), false);
             return [
-                'logo' => 'startups/logos/'.$this->faker->image($dir = storage_path('app/test'), $width = 640, $height = 480, null, false),
+                'logo' => 'startups/logos/'.$filename,
             ];
         });
     }
