@@ -12,7 +12,7 @@ class VisualizarLeilaoNaoLogadoTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visitRoute('home')
-                    ->assertSee('Leilões');
+                    ->assertSee('Exibições de produto');
         });
     }
 

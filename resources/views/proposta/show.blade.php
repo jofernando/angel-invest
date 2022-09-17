@@ -195,7 +195,7 @@
                                     @endif
                                     @can('update', $proposta)
                                         <a class="btn btn-success btn-default btn-padding border" type="button" href="{{route('leilao.lances', $leilao)}}">
-                                            <span style="text-shadow: 2px 1px 4px rgb(49, 49, 21);">Ver todos os lances</span>
+                                            <span style="text-shadow: 2px 1px 4px rgb(49, 49, 21);">Ver todas as ofertas</span>
                                         </a>
                                     @endcan
                                 @endauth

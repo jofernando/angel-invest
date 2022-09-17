@@ -2,7 +2,7 @@
     <div class="container index-proposta" style="margin-top: 50px;">
         <div class="row titulo-pag">
             <div class="col-md-8">
-                <h4><a class="link-default" href="{{route('startups.index')}}">Minhas startups</a> > <a class="link-default" href="{{route('startups.show', $leilao->proposta->startup)}}">{{mb_strimwidth($leilao->proposta->startup->nome, 0, 30, "...")}}</a> > <a class="link-default" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">{{$leilao->proposta->titulo}}</a> > Lances</h4>
+                <h4><a class="link-default" href="{{route('startups.index')}}">Minhas startups</a> > <a class="link-default" href="{{route('startups.show', $leilao->proposta->startup)}}">{{mb_strimwidth($leilao->proposta->startup->nome, 0, 30, "...")}}</a> > <a class="link-default" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">{{$leilao->proposta->titulo}}</a> > Ofertas</h4>
             </div>
         </div>
         <div class="col-md-12 mt-2 mb-2">

@@ -74,7 +74,7 @@
                         <div class="p-5 mb-4 bg-light rounded-3">
                             <div class="container-fluid py-5">
                                 <h1 class="display-5 fw-bold">Histórico de compras</h1>
-                                <p class="col-md-8 fs-4">Seu histórico de transações está vazio. Para efetuar investimentos nos Leilões é necessário adicionar créditos.<a href="{{route('pagamento.create')}}">Clique aqui</a> para adicionar créditos.</p>
+                                <p class="col-md-8 fs-4">Seu histórico de transações está vazio. Para efetuar investimentos nos Exibições de produto é necessário adicionar créditos.<a href="{{route('pagamento.create')}}">Clique aqui</a> para adicionar créditos.</p>
                             </div>
                         </div>
                     </div>

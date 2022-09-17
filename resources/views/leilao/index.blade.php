@@ -2,7 +2,7 @@
     <div class="container index-proposta" style="margin-top: 50px; padding-bottom: 70px;">
         <div class="row titulo-pag">
             <div class="col-md-8">
-                <h4>Leilões</h4>
+                <h4>Exibições de produto</h4>
             </div>
             <div class="col-md-4" style="text-align: right;">
                 <span class="span-btn-add"><a href="{{route('leilao.create')}}" class="btn btn-success btn-default btn-padding border"> <img src="{{asset('img/dolar-bag.svg')}}" alt="ìcone de adicionar nova produto"> Criar uma exibição do produto</a></span>
@@ -88,7 +88,7 @@
                 <div class="col-md-12">
                     <div class="p-5 mb-4 bg-light rounded-3">
                         <div class="container-fluid py-5">
-                            <h1 class="display-5 fw-bold">Leilões</h1>
+                            <h1 class="display-5 fw-bold">Exibições de produto</h1>
                             <p class="col-md-8 fs-4">Para que seu produto seja exposto aos investidores é necessário criar uma exibição do produto. <a href="{{route('leilao.create')}}">Clique aqui</a> para criar um exibição do produto.</p>
                         </div>
                     </div>
