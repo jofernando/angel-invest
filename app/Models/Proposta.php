@@ -23,13 +23,18 @@ class Proposta extends Model
 
     /**
      * Relacionamento inverso para startup
-     * 
+     *
      * @return Startup $startup : startup relacionada a proposta
      */
 
     public function startup()
-    {   
+    {
         return $this->belongsTo(Startup::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes')->using(Like::class);
     }
 
     /**
@@ -37,7 +42,7 @@ class Proposta extends Model
      *
      * @return Collect $leioes : Collect de leilões a qual a proposta está relacionada
      */
-    public function leiloes() 
+    public function leiloes()
     {
         return $this->hasMany(Leilao::class);
     }

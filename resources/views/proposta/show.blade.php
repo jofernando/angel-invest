@@ -34,7 +34,8 @@
                             <div class="col-md-6">
                                 <h3>{{$proposta->titulo}}</h3>
                             </div>
-                            <div class="col-md-6" style="text-align: right;">
+                            <div class="col-md-6 d-flex justify-content-between">
+                                @livewire('likes', ['proposta' => $proposta])
                                 <span id="span-area-proposta-startup">{{$startup->area->nome}}</span>
                             </div>
                         </div>

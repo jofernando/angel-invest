@@ -881,3 +881,9 @@ label {
   background-color: var(--ternary-color) !important;
 }
 /* X PAGAMENTO X */
+
+.icon-like {
+    height: 25px;
+    cursor: pointer;
+    display: inline;
+}

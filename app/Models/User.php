@@ -74,6 +74,11 @@ class User extends Authenticatable
         return $this->hasOne(Investidor::class);
     }
 
+    public function likes()
+    {
+        return $this->belongsToMany(Proposta::class, 'likes')->using(Like::class);
+    }
+
     /*
      * Array profile enum
     */
