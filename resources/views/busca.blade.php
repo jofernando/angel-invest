@@ -145,7 +145,7 @@
                                         </div>
                                     </div>
                                     <a class="video-link" href="{{route('propostas.show', ['startup' => $leilao->proposta->startup, 'proposta' => $leilao->proposta])}}">
-                                        <img class="thumbnail"  src="{{asset('storage/'.$leilao->proposta->thumbnail_caminho)}}" alt="Thumbnail do produto" style="height: 220px;">
+                                        <img class="thumbnail"  src="{{asset('storage/'.$leilao->proposta->thumbnail_caminho)}}" alt="Thumbnail do produto">
                                     </a>
                                     <div id="div-card-hearder" class="card-header">
                                         <div class="row">

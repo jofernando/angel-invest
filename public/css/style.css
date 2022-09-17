@@ -304,10 +304,10 @@ button.selected{
 }
 
 .circulo-selected {
-  width: 28px; 
-  height: 28px; 
-  border:3px solid #009FC2; 
-  border-radius: 60%; 
+  width: 28px;
+  height: 28px;
+  border:3px solid #009FC2;
+  border-radius: 60%;
   background-color: white;
 
 }
@@ -321,8 +321,8 @@ button.selected{
 }
 
 .numero-selected {
-  text-align: center; 
-  color: #009FC2; 
+  text-align: center;
+  color: #009FC2;
   font-weight: bold;
 }
 
@@ -646,7 +646,7 @@ label {
     background-color: var(--primaria);
 }
 
-/* STARTUP */ 
+/* STARTUP */
 
 .card-startup {
   border: none;
@@ -774,7 +774,7 @@ label {
 }
 
 #collapse-search .card {
-  background-color: #297B81; 
+  background-color: #297B81;
   /* text-align: left; */
 }
 
@@ -782,13 +782,15 @@ label {
 
 /* X VIDEO BUTTON PLAYER X */
 .video-link {
-  display:block; 
+  display:flex;
   overflow:visible;
   cursor: pointer;
+  justify-content: center;
 }
 
 .video-link .thumbnail {
-  width:100%;
+  height: 220px;
+  width: auto;
   object-position: center;
 }
 
