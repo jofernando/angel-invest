@@ -83,29 +83,21 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            Contato
-                                        </div>
+                                    <div>
+                                        Contato
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <span style="font-weight: bolder;">E-mail: </span> {{$startup->email}}
-                                        </div>
+                                    <div class="col-md-12">
+                                        <span style="font-weight: bolder;">E-mail: </span> {{$startup->email}}
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <span style="font-weight: bolder;">Telefone: </span> @if($startup->telefones->first() != null) {{$startup->telefones->first()->numero}} @else (##) #####-#### @endif
-                                        </div>
+                                    <div class="col-md-12">
+                                        <span style="font-weight: bolder;">Telefone: </span> @if($startup->telefones->first() != null) {{$startup->telefones->first()->numero}} @else (##) #####-#### @endif
                                     </div>
                                     @auth
                                         @if (auth()->user()->id != $proposta->startup->user_id)
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <a href="{{route('chat', $startup->user)}}" class="btn btn-success btn-color-dafault mb-4">
-                                                        {{ __('Chat privado') }}
-                                                    </a>
-                                                </div>
+                                            <div class="col-md-12 mt-3">
+                                                <a href="{{route('chat', $startup->user)}}" class="btn btn-success btn-color-dafault mb-4">
+                                                    {{ __('Chat privado') }}
+                                                </a>
                                             </div>
                                         @endif
                                     @endauth
@@ -128,12 +120,9 @@
                                         @include('leiloes.lances.edit', ['leilao' => $proposta->leilao_atual(), 'lance' => $lance])
                                     @endif
                                     @if($index < $leilao->numero_ganhadores)
-<<<<<<< HEAD
                                         @if (auth()->user() && auth()->user()->investidor && $lance->investidor->id == auth()->user()->investidor->id && $proposta->leilao_atual() != null && $lance->leilao->id == $proposta->leilao_atual()->id)
                                             @include('leiloes.lances.edit', ['leilao' => $lance->leilao, 'lance' => $lance])
                                         @endif
-=======
->>>>>>> kelwin
                                         <div @class([
                                                 'w-1/2' => $index == 1 || $index == 2,
                                                 'w-full' => $index != 1 && $index != 2,

@@ -35,7 +35,12 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('chat.index')}}">Mensagens</a>
+                    <a class="nav-link" href="{{route('chat.index')}}">
+                        <span>Mensagens</span>
+                        @if (auth()->user()->mensagensNaoLidas()->exists())
+                            <span style="font-size: 0.7rem; font-weight: 700; position: relative; top: -5px;">{{auth()->user()->mensagensNaoLidas()->count()}}</span>
+                        @endif
+                    </a>
                 </li>
                 {{--<li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>

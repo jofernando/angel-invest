@@ -82,6 +82,28 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all of the mensagens for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function mensagensComoDestinatario(): HasMany
+    {
+        return $this->hasMany(Mensagem::class, 'destinatario_id');
+    }
+
+    /**
+     * Get all of the mensagens for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function mensagensNaoLidas(): HasMany
+    {
+        return $this->mensagensComoDestinatario()->where('visualizada', false);
+    }
+
+
+
+    /**
      * Get all of the assinaturas for the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

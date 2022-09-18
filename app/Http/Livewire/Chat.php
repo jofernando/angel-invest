@@ -21,6 +21,7 @@ class Chat extends Component
     {
         $this->flag = false;
     }
+
     public function mensagemLida($id)
     {
         $mensagem = $this->mensagens
