@@ -14,6 +14,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('produto.search')}}">Produtos</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('planos')}}">Planos</a>
+            </li>
             @auth
                 @if(auth()->user()->tipo == 1)
                     <li class="nav-item">

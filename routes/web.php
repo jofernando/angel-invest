@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssinaturaController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\StartupController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\LanceController;
 use App\Http\Controllers\TelefoneController;
 use App\Http\Controllers\LeilaoController;
 use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\PlanoController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,7 @@ use PhpParser\Builder\Function_;
 Route::get('/', [WelcomeController::class, 'welcome'])->name('home');
 Route::get('startup/{startup}/proposta/{proposta}', [PropostaController::class, 'show'])->name('propostas.show');
 Route::get('/produtos', [PropostaController::class, 'search'])->name('produto.search');
+Route::get('/planos', PlanoController::class)->name('planos');
 
 Route::middleware([
     'auth:sanctum',
@@ -43,7 +46,9 @@ Route::middleware([
     })->name('chat');
 
     Route::get('/chat', ChatController::class)->name('chat.index');
-    
+
+    Route::post('/assinar/{plano}', AssinaturaController::class)->name('assinar.plano');
+
     Route::resource('startups', StartupController::class);
 
     Route::get('/get-component', [StartupController::class, 'startupGetComponent'])->name('startup.component.ajax');

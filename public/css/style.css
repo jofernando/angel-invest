@@ -887,3 +887,31 @@ label {
     cursor: pointer;
     display: inline;
 }
+
+.ads-fixed-bottom {
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+}
+.ads-fixed-bottom div {
+    position: relative;
+}
+
+.ads-fixed-bottom span {
+    color: #1782AF;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    background-color: #ffffff;
+    padding: 0 5px;
+    cursor: pointer;
+
+}
+.ads-fixed-bottom img {
+    max-height: 200px;
+    width: auto;
+}
+

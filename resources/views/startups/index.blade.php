@@ -43,7 +43,7 @@
         @if ($startups->count() > 0)
             <div class="row mt-4">
                 @foreach ($startups as $startup)
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-4">
                         <div class="card card-startup mb-3">
                             <div class="card-header" style="transform: rotate(0);">
                                 <div class="row">

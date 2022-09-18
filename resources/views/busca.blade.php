@@ -323,6 +323,12 @@
                 </div>
             </div>
         @endif
+        <div class="ads ads-fixed-bottom d-none">
+            <div>
+                <img src="/storage/ads/4170590998583202124.jpeg">
+                <span onclick="remove('ads-fixed-bottom')">x</span>
+            </div>
+        </div>
         @component('layouts.footer')@endcomponent
         <script>
             $(document).ready(function(){
@@ -360,5 +366,12 @@
 
             }
         </script>
+        @auth
+            @if (! auth()->user()->assinaturasAtivas()->exists())
+                <script src="{{ asset('js/ads.js') }}"></script>
+            @endif
+        @else
+            <script src="{{ asset('js/ads.js') }}"></script>
+        @endauth
     </body>
 </html>
