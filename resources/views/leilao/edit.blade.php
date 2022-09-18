@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
-                                        <label for="produto_do_leilão" class="form-label ">Produto do leilão <span style="color: red;">*</span></label>
+                                        <label for="produto_do_leilão" class="form-label ">Produto da exibição <span style="color: red;">*</span></label>
                                         <select name="produto_do_leilão" id="produto_do_leilão" class="form-control @error('produto_do_leilão') is-invalid @enderror" >
                                             <option value="" selected disabled>-- Selecione um produto --</option>
                                             @foreach ($produtos as $produto)

@@ -20,7 +20,7 @@
                         <a class="nav-link" href="{{route('startups.index')}}">Minhas startups</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('leilao.index')}}">Meus leilões</a>
+                        <a class="nav-link" href="{{route('leilao.index')}}">Meus produtos expostos</a>
                     </li>
                 @endif
                 @if(auth()->user()->tipo == 2)
