@@ -65,21 +65,17 @@
                                 @endcan
                                 <div class="row mb-4">
                                     <div class="row">
-                                        <div class="col-md-12 mb-2">
+                                        <div class="col-md-12 mb-2 text-bold">
                                             Documentos da startup
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 ml-2">
-                                            @foreach ($startup->documentos as $i => $documento)
-                                                <a href="{{route('documento.arquivo', ['documento' => $documento->id])}}" target="_blank">
-                                                    <div class="documentos">
-                                                        <span style="font-weight: bold; color: rgb(0, 0, 0)">{{$documento->nome}} </span>
-                                                        <img  src="{{asset('img/pdf-icon.svg')}}" alt="Ícone de documento" title="Nome do documento">
-                                                    </div>
-                                                </a>
-                                            @endforeach
+                                        @foreach ($startup->documentos as $i => $documento)
+                                        <div class="col-md-12">
+                                            <label for="nome_{{$i}}" class="form-label pb-1">{{$i+1}} - {{$documento->nome}}</label>
+                                            <a href="{{route('documento.arquivo', ['documento' => $documento->id])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="documento {{$documento->nome}}" style="width: 16px;"></a>
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="row">
