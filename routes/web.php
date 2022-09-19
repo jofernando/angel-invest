@@ -73,6 +73,8 @@ Route::middleware([
     Route::get('pagamentos',[PagamentoController::class, 'index'] )->name('pagamento.index');
     Route::post('pagamento/salvar',[PagamentoController::class, 'store'] )->name('pagamento.store');
 
+    Route::get('/dashboard/{ordenacao}', [PagamentoController::class, 'dashboard'])->name('pagamento.dashboard');
+
 });
 
     Route::post('pagseguro/notificacao', [PagamentoController::class, 'notificacao'])->name('pagamento.notificacao');

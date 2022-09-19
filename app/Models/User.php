@@ -85,6 +85,7 @@ class User extends Authenticatable
     public const PROFILE_ENUM = [
         'entrepreneur' => 1,
         'investor' => 2,
+        'admin' => 3,
     ];
 
     public const SEXO_ENUM = [

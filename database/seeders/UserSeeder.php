@@ -49,5 +49,16 @@ class UserSeeder extends Seeder
             'data_de_nascimento' => date('2001-01-30'),
         ]);
 
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'tipo' => User::PROFILE_ENUM['admin'],
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+            'cpf' => '141.181.560-24',
+            'sexo' => 3,
+            'data_de_nascimento' => date("2001-01-30"),
+        ]);
+
     }
 }
