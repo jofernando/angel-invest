@@ -9,6 +9,8 @@ class Pagamento extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['valor','status_transacao','hash_pagamento','codigo','created_at','updated_at'];
+
     public function investidor()
     {
         return $this->belongsTo(Investidor::class);
