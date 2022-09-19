@@ -138,7 +138,7 @@
                     <div class="p-5 mb-5 mt-4 bg-light rounded-3">
                         <div class="container-fluid py-5">
                             <h1 class="display-5 fw-bold">Investimentos</h1>
-                            <p class="col-md-8 fs-4">Nenhum lance efetuado</p>
+                            <p class="col-md-8 fs-4">Nenhuma oferta efetuada</p>
                         </div>
                     </div>
                 </div>
