@@ -63,18 +63,44 @@
                                         </div>
                                     </div>
                                 @endcan
+                                @if ($leilao)
+                                    <div class="row mb-4">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-2">
+                                                @if ($leilao->numero_ganhadores == 1)
+                                                {{$leilao->numero_ganhadores}} investidor será contemplado com o seguinte documento
+                                                @else
+                                                {{$leilao->numero_ganhadores}} investidores serão contemplados com o seguinte documento
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-2">
+                                                Termo de reponsabilidade e compromisso com o investidor contemplado:
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 ml-2">
+                                                <a href="{{route('leilao.termo', $leilao)}}" target="_blank" class="text-decoration-none">
+                                                    <span style="font-weight: bold; color: rgb(0, 0, 0)">Termo</span>
+                                                    <img  src="{{asset('img/pdf-icon.svg')}}" alt="Ícone de documento" title="termo">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="row mb-4">
                                     <div class="row">
                                         <div class="col-md-12 mb-2 text-bold">
-                                            Documentos da startup
+                                            Documentos comprabatórios que certificam a existência e regularidade da startup
                                         </div>
                                     </div>
                                     <div class="row">
                                         @foreach ($startup->documentos as $i => $documento)
-                                        <div class="col-md-12">
-                                            <label for="nome_{{$i}}" class="form-label pb-1">{{$i+1}} - {{$documento->nome}}</label>
-                                            <a href="{{route('documento.arquivo', ['documento' => $documento->id])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="documento {{$documento->nome}}" style="width: 16px;"></a>
-                                        </div>
+                                            <div class="col-md-12">
+                                                <label for="nome_{{$i}}" class="form-label pb-1">{{$i+1}} - {{$documento->nome}}</label>
+                                                <a href="{{route('documento.arquivo', ['documento' => $documento->id])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="documento {{$documento->nome}}" style="width: 16px;"></a>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
