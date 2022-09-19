@@ -19,6 +19,7 @@ class CreateLeilaosTable extends Migration
             $table->date('data_inicio');
             $table->date('data_fim');
             $table->integer('numero_ganhadores');
+            $table->double('taxa_cobrada');
             $table->string('porcetagem_caminho')->nullable(true);
             $table->foreignId('proposta_id')->constrained();
             $table->timestamps();

@@ -85,7 +85,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="data_de_início" class="form-label ">Data de início da exibição do produto <span style="color: red;">*</span></label>
-                                        <input id="data_de_início" name="data_de_início" type="date" class="form-control @error('data_de_início') is-invalid @enderror" required value="{{old('data_de_início')}}">
+                                        <input id="data_de_início" name="data_de_início" type="date" class="form-control @error('data_de_início') is-invalid @enderror" required value="{{old('data_de_início')}}" onchange="calcularValorTaxa()">
 
                                         @error('data_de_início')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="data_de_fim" class="form-label ">Data de fim da exibição do produto <span style="color: red;">*</span></label>
-                                        <input id="data_de_fim" name="data_de_fim" type="date" class="form-control @error('data_de_fim') is-invalid @enderror" required value="{{old('data_de_fim')}}">
+                                        <input id="data_de_fim" name="data_de_fim" type="date" class="form-control @error('data_de_fim') is-invalid @enderror" required value="{{old('data_de_fim')}}" onchange="calcularValorTaxa()">
 
                                         @error('data_de_fim')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
@@ -114,6 +114,18 @@
                                         <input id="termo" name="termo_de_porcentagem_do_produto" onchange="trocarNome(this)" type="file" class="input-enviar-arquivo @error('termo_de_porcetagem') is-invalid @enderror" accept=".pdf">
 
                                         @error('termo_de_porcentagem_do_produto')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
+                                        <input type="checkbox" name="taxa" id="taxa" required @if(old('taxa')) selected @endif>
+                                        <label for="taxa" class="form-label"> Eu concordo com a cobrança da taxa no valor de <span id="valor_taxa" class="text-red">R$ ??</span> para expor o meu produto!
+                                        </label>
+                                        @error('taxa')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>
@@ -154,5 +166,32 @@
         function editar_caminho(string) {
             return string.split("\\")[string.split("\\").length - 1];
         }
+
+        function calcularValorTaxa() {
+            const data_inicio = document.getElementById('data_de_início');
+            const data_fim = document.getElementById('data_de_fim');
+            if(data_inicio.value && data_fim.value){
+                $.ajax({
+                    url:"{{route('leilao.valor.ajax')}}",
+                    type:"get",
+                    data:{"data_de_início": data_inicio.value, "data_de_fim": data_fim.value},
+                    dataType:'json',
+                    success: function(resposta) {
+                        if(resposta.valor == null){
+                            console.log('nulo');
+                            let alerta = `<div class="col-md-12">
+                                            <div class="alert alert-danger" role="alert">
+                                                <p>O intervalo deve ser menor que 178 dias.</p>
+                                            </div>
+                                        </div>`;
+                            $("#taxa").parent().parent().append(alerta);
+                        }else{
+                            $("#valor_taxa")[0].textContent = "R$ "+resposta.valor;
+                        }
+                    }
+                });
+            }
+        }
+
     </script>
 </x-app-layout>

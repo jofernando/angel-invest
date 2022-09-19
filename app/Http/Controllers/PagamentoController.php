@@ -5,7 +5,9 @@ use PagSeguro;
 use App\Http\Requests\PagamentoRequest;
 use App\Models\Investidor;
 use App\Models\Pagamento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+
 header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
 
 class PagamentoController extends Controller
@@ -87,4 +89,109 @@ class PagamentoController extends Controller
         }
     }
 
+    public function dashboard($ordenacao) {
+        $this->authorize('isAdmin', User::class);
+        switch ($ordenacao) {
+            case '7_dias':
+                $collection = Pagamento::where('created_at', '>=', Carbon::now()->subWeek())
+                ->selectRaw("
+                sum(valor) AS sum,
+                extract(DAY FROM created_at) AS day
+                ")
+                ->orderBy('day')
+                ->groupBy('day')
+
+                ->get();
+
+                $pagamentos = $collection->toArray();
+                $pagamentos = array_reduce($pagamentos, function ($result, $item) {
+                    $result[$item['day']] = $item['sum'];
+                    return $result;
+                }, array());
+                break;
+            case 'ultimo_mes':
+                $collection =  Pagamento::where('created_at', '>=', Carbon::now()->subMonth())
+                ->selectRaw("
+                sum(valor) AS sum,
+                extract(DAY FROM created_at) AS day
+                ")
+                ->orderBy('day')
+                ->groupBy('day')
+                ->get();
+
+                $pagamentos = $collection->toArray();
+                $pagamentos = array_reduce($pagamentos, function ($result, $item) {
+                    $result[$item['day']] = $item['sum'];
+                    return $result;
+                }, array());
+                break;
+            case 'meses':
+                $collection =  Pagamento::where('created_at', '>=', Carbon::now()->subYear())
+                ->selectRaw("
+                sum(valor) AS sum,
+                extract(MONTH FROM created_at) AS month
+                ")
+                ->orderBy('month')
+                ->groupBy('month')
+                ->get();
+
+                $pagamentos = $collection->toArray();
+                $pagamentos = array_reduce($pagamentos, function ($result, $item) {
+                    $result[$item['month']] = $item['sum'];
+                    return $result;
+                }, array());
+                break;
+            case 'anos':
+                $collection =  Pagamento::where('created_at', '>=', Carbon::now()->subYears(5))
+                ->selectRaw("
+                sum(valor) AS sum,
+                extract(YEAR FROM created_at) AS year
+                ")
+                ->orderBy('year')
+                ->groupBy('year')
+                ->get();
+                $pagamentos = $collection->toArray();
+                $pagamentos = array_reduce($pagamentos, function ($result, $item) {
+                    $result[$item['year']] = $item['sum'];
+                    return $result;
+                }, array());
+                break;
+            default:
+                $collection = Pagamento::where('created_at', '>=', Carbon::now()->subWeek())
+                ->selectRaw("
+                sum(valor) AS sum,
+                extract(DAY FROM created_at) AS day
+                ")
+                ->orderBy('day')
+                ->groupBy('day')
+                ->get();
+                $pagamentos = $collection->toArray();
+                $pagamentos = array_reduce($pagamentos, function ($result, $item) {
+                    $result[$item['day']] = $item['sum'];
+                    return $result;
+                }, array());
+                break;
+        }
+
+        $titulo = $this->titulo($ordenacao);
+        return view('admin.dashboard', compact("pagamentos", "collection", "ordenacao", "titulo"));
+    }
+
+    private function titulo($ordenacao) {
+        switch ($ordenacao) {
+            case '7_dias':
+                $titulo = "Gráfico de compra de créditos nos últimos 7 dias";
+                break;
+            case 'ultimo_mes':
+                $titulo = "Gráfico de compra de créditos nos últimos 30 dias";
+                break;
+            case 'meses':
+                $titulo = "Gráfico de compra de créditos nos últimos 12 meses";
+                break;
+            case 'anos':
+                $titulo = "Gráfico de compra de créditos nos últimos 5 anos";
+                break;
+        }
+        return $titulo;
+    }
 }

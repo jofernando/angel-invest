@@ -76,6 +76,11 @@ class User extends Authenticatable
         return $this->hasOne(Investidor::class);
     }
 
+    public function pagamentos()
+    {
+        return $this->hasMany(Pagamento::class);
+    }
+
     public function likes()
     {
         return $this->belongsToMany(Proposta::class, 'likes')->using(Like::class);
@@ -134,6 +139,7 @@ class User extends Authenticatable
     public const PROFILE_ENUM = [
         'entrepreneur' => 1,
         'investor' => 2,
+        'admin' => 3,
     ];
 
     public const SEXO_ENUM = [
@@ -150,12 +156,10 @@ class User extends Authenticatable
     protected static function booted()
     {
         static::created(function ($user) {
-            if($user->tipo == User::PROFILE_ENUM['investor']) {
-                $investidor = new Investidor();
-                $investidor->user()->associate($user);
-                $investidor->carteira = 5000000;
-                $investidor->save();
-            }
+            $investidor = new Investidor();
+            $investidor->user()->associate($user);
+            $investidor->carteira = 500000;
+            $investidor->save();
         });
     }
 

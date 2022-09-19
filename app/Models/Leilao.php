@@ -17,6 +17,7 @@ class Leilao extends Model
         'numero_ganhadores',
         'porcetagem_caminho',
         'proposta_id',
+        'taxa_cobrada',
     ];
 
     /**
@@ -56,6 +57,11 @@ class Leilao extends Model
         $startdate = new DateTime($this->data_inicio);
         $enddate = new DateTime($this->data_fim);
         return $now >= $startdate && $now <= $enddate;
+    }
+
+    public function investidores_maximo()
+    {
+        return $this->lances()->count() == $this->numero_ganhadores;
     }
 
     public function investidor_fez_lance(Investidor $investidor)

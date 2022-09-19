@@ -30,9 +30,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('lances')}}">Meus investimentos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('pagamento.index')}}">Carteira</a>
-                </li>
                 @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('chat.index')}}">
@@ -42,6 +39,16 @@
                         @endif
                     </a>
                 </li>
+                @if(auth()->user()->tipo != 3)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('pagamento.index')}}">Carteira</a>
+                </li>
+                @endif
+                @if(auth()->user()->tipo == 3)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('pagamento.dashboard', '7_dias')}}">Dashboard</a>
+                </li>
+                @endif
                 {{--<li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
                 </li>--}}

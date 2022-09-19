@@ -20,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Endereco' => 'App\Policies\EnderecoPolicy',
         'App\Models\Leilao'  => 'App\Policies\LeilaoPolicy',
         'App\Models\Telefone'  => 'App\Policies\TelefonePolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy',
     ];
 
     /**

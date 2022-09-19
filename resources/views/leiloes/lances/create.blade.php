@@ -26,7 +26,7 @@
                                     </label>
                                 </div>
                                 <div class="bg-[#FFD6D6] text-center py-3 text-[#2F0E0E]">
-                                    Faça uma oferta maior que R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
+                                    Faça uma oferta de R$ {{ number_format($leilao->valor_corte(), 2, ',', '.') }} para conseguir o produto
                                 </div>
                                 <div class="flex mt-3">
                                     <div class="w-1/2 bg-[#DADADA] mr-2 text-center py-3">

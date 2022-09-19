@@ -57,6 +57,7 @@ Route::middleware([
     Route::resource('startups/{startup}/enderecos', EnderecoController::class);
     Route::resource('startups/{startup}/documentos', DocumentoController::class)->except('edit', 'update');
     Route::resource('leilao', LeilaoController::class)->except('show');
+    Route::get('/leilao/valor', [LeilaoController::class, 'jsonReturnTaxa'])->name('leilao.valor.ajax');
     Route::resource('leiloes.lances', LanceController::class)->parameters([
         'leiloes' => 'leilao'
     ])->except('index');
@@ -76,6 +77,8 @@ Route::middleware([
     Route::get('pagamento/novo-pagamento',[PagamentoController::class, 'create'] )->name('pagamento.create');
     Route::get('pagamentos',[PagamentoController::class, 'index'] )->name('pagamento.index');
     Route::post('pagamento/salvar',[PagamentoController::class, 'store'] )->name('pagamento.store');
+
+    Route::get('/dashboard/{ordenacao}', [PagamentoController::class, 'dashboard'])->name('pagamento.dashboard');
 
 });
 
