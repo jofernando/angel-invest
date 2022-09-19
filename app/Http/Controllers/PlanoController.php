@@ -15,7 +15,7 @@ class PlanoController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $planos = Plano::all();
+        $planos = Plano::orderBy('dias')->get();
         return view('planos', compact('planos'));
     }
 }
