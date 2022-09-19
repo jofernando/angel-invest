@@ -896,11 +896,11 @@ label {
     width: 100%;
     background-color: white;
 }
-.ads-fixed-bottom div {
+.ads div {
     position: relative;
 }
 
-.ads-fixed-bottom span {
+.ads span {
     color: #1782AF;
     position: absolute;
     top: 0px;

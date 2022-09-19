@@ -212,6 +212,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex" style="margin-top: 6rem;">
+                        <div class="ads d-none side-ads">
+                            <div class="side">
+                                <img class="img-fluid" src="/storage/ads/5514762470426294044.gif">
+                                <span onclick="remove('side-ads')">x</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>

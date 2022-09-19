@@ -98,6 +98,7 @@
                                                                 <h6>{{mb_strimwidth($proposta->titulo, 0, 20, "...")}}</h6>
                                                                 @if ($leilao = $proposta->leilao_atual())
                                                                     <span class="text-proposta"><img class="icon" src="{{asset('img/calendar.svg')}}" alt="Ícone de calendario"> Ofertas durante: <b>{{date('d/m', strtotime($leilao->data_inicio))}} a {{date('d/m', strtotime($leilao->data_fim))}}</b></span>
+                                                                    <br>
                                                                     <span class="text-proposta"><img class="icon" src="{{asset('img/preco.svg')}}" alt="Ícone de valor mínimo"> Valor mínimo <b>R$ {{number_format($leilao->valor_minimo, 2,",",".")}}</b></span>
                                                                 @endif
                                                             </div>
