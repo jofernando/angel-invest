@@ -75,14 +75,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 mb-2">
+                                            <div class="col-md-12 mb-2 fw-bold">
                                                 Termo de reponsabilidade e compromisso com o investidor contemplado:
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 ml-2">
                                                 <a href="{{route('leilao.termo', $leilao)}}" target="_blank" class="text-decoration-none">
-                                                    <span style="font-weight: bold; color: rgb(0, 0, 0)">Termo</span>
+                                                    <span style="color: var(--bs-body-color)">Termo</span>
                                                     <img  src="{{asset('img/pdf-icon.svg')}}" alt="Ícone de documento" title="termo">
                                                 </a>
                                             </div>
@@ -91,21 +91,21 @@
                                 @endif
                                 <div class="row mb-4">
                                     <div class="row">
-                                        <div class="col-md-12 mb-2 text-bold">
+                                        <div class="col-md-12 mb-2 fw-bold">
                                             Documentos comprabatórios que certificam a existência e regularidade da startup
                                         </div>
                                     </div>
                                     <div class="row">
                                         @foreach ($startup->documentos as $i => $documento)
                                             <div class="col-md-12">
-                                                <label for="nome_{{$i}}" class="form-label pb-1">{{$i+1}} - {{$documento->nome}}</label>
+                                                <span for="nome_{{$i}}" class="pb-1">{{$i+1}} - {{$documento->nome}}</span>
                                                 <a href="{{route('documento.arquivo', ['documento' => $documento->id])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="documento {{$documento->nome}}" style="width: 16px;"></a>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div>
+                                    <div class="fw-bold" style="font-size: 1.1rem;">
                                         Contato
                                     </div>
                                     <div class="col-md-12">
